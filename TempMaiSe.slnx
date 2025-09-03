@@ -1,0 +1,17 @@
+<Solution>
+  <Folder Name="/examples/" />
+  <Folder Name="/examples/minimal-api/" />
+  <Folder Name="/examples/minimal-api/src/">
+    <Project Path="examples/minimal-api/src/TempMaiSe.Samples.Api/TempMaiSe.Samples.Api.csproj" />
+  </Folder>
+  <Folder Name="/examples/minimal-api/test/">
+    <Project Path="examples/minimal-api/test/TempMaiSe.Samples.Api.Tests/TempMaiSe.Samples.Api.Tests.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/TempMaiSe.Mailer/TempMaiSe.Mailer.csproj" />
+    <Project Path="src/TempMaiSe.Models/TempMaiSe.Models.csproj" />
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="test/TempMaiSe.Tests/TempMaiSe.Tests.csproj" />
+  </Folder>
+</Solution>
