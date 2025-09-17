@@ -12,7 +12,7 @@ TempMaiSe is an open-source library designed to simplify the process of sending 
 
 To use the TempMaiSe library in your project, follow these steps:
 
-1. Add a reference to the [`TempMaiSe.Mailer`](https://www.nuget.org/packages/TempMaiSe.Mailer) NuGet package.
+1. Add a reference to the [`AlbusKavaliro.TempMaiSe.Mailer`](https://www.nuget.org/packages/AlbusKavaliro.Mailer) NuGet package.
 
 ## Usage
 
@@ -28,7 +28,7 @@ To implement a custom repository and use the TempMaiSe library, follow these ste
 
 Please note that additional authentication and authorization features may need to be implemented according to your specific requirements.
 
-For more information, refer to the [TempMaiSe documentation](https://github.com/TempMaiSe/TempMaiSe).
+For more information, refer to the [TempMaiSe documentation](https://github.com/AlbusKavaliro/TempMaiSe).
 
 ### Custom Repository
 
@@ -183,7 +183,7 @@ The `IFluidExtensibility` implementation currently only enables you to add new i
 
 ## Contributing
 
-Contributions are welcome! If you encounter any issues or have suggestions for improvements, please open an issue or submit a pull request on the [TempMaiSe GitHub repository](https://github.com/TempMaiSe/TempMaiSe).
+Contributions are welcome! If you encounter any issues or have suggestions for improvements, please open an issue or submit a pull request on the [TempMaiSe GitHub repository](https://github.com/AlbusKavaliro/TempMaiSe).
 
 ## License
 

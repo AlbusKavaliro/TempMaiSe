@@ -12,14 +12,14 @@
   <PropertyGroup>
     <Authors>TempMaiSe Team</Authors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageReleaseNotes>https://github.com/TempMaiSe/TempMaiSe/blob/main/CHANGELOG.md</PackageReleaseNotes>
+    <PackageReleaseNotes>https://github.com/AlbusKavaliro/AlbusKavaliro/blob/main/CHANGELOG.md</PackageReleaseNotes>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <RepositoryUrl>https://github.com/TempMaiSe/TempMaiSe.git</RepositoryUrl>
+    <RepositoryUrl>https://github.com/AlbusKavaliro/TempMaiSe.git</RepositoryUrl>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryBranch>main</RepositoryBranch>
-    <RepositoryCommit>ae1224ff32340d3305e7268112cd95c4251225ca</RepositoryCommit>
-    <Version>2.3.3</Version>
+    <RepositoryCommit>46a0cc3407029b8799255562380206384ca714e8</RepositoryCommit>
+    <Version>3.0.0-beta.1</Version>
   </PropertyGroup>
 
 </Project>

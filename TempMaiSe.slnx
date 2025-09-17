@@ -1,0 +1,17 @@
+<Solution>
+  <Folder Name="/examples/" />
+  <Folder Name="/examples/minimal-api/" />
+  <Folder Name="/examples/minimal-api/src/">
+    <Project Path="examples/minimal-api/src/AlbusKavaliro.TempMaiSe.Samples.Api/AlbusKavaliro.TempMaiSe.Samples.Api.csproj" />
+  </Folder>
+  <Folder Name="/examples/minimal-api/test/">
+    <Project Path="examples/minimal-api/test/AlbusKavaliro.TempMaiSe.Samples.Api.Tests/AlbusKavaliro.TempMaiSe.Samples.Api.Tests.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/AlbusKavaliro.TempMaiSe.Mailer/AlbusKavaliro.TempMaiSe.Mailer.csproj" />
+    <Project Path="src/AlbusKavaliro.TempMaiSe.Models/AlbusKavaliro.TempMaiSe.Models.csproj" />
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="test/AlbusKavaliro.TempMaiSe.Tests/AlbusKavaliro.TempMaiSe.Tests.csproj" />
+  </Folder>
+</Solution>

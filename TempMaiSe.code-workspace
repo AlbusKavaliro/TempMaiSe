@@ -5,7 +5,7 @@
 		}
 	],
 	"settings": {
-		"dotnet.defaultSolution": "TempMaiSe.sln"
+		"dotnet.defaultSolution": "TempMaiSe.slnx"
 	},
 	"extensions": {
 		"recommendations": [

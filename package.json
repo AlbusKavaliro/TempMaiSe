@@ -44,8 +44,8 @@
         ],
         "npmPublish": false,
         "projectPath": [
-            "src/TempMaiSe.Mailer/TempMaiSe.Mailer.csproj",
-            "src/TempMaiSe.Models/TempMaiSe.Models.csproj"
+            "src/AlbusKavaliro.TempMaiSe.Mailer/AlbusKavaliro.TempMaiSe.Mailer.csproj",
+            "src/AlbusKavaliro.TempMaiSe.Models/AlbusKavaliro.TempMaiSe.Models.csproj"
         ],
         "includeSymbols": true,
         "files": [
@@ -67,5 +67,5 @@
             }
         ]
     },
-    "version": "2.3.3"
+    "version": "3.0.0-beta.1"
 }
