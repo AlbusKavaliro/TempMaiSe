@@ -10,7 +10,7 @@
     <PackageVersion Include="jcamp.FluentEmail.Smtp" Version="3.8.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageVersion Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageVersion Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageVersion Include="Newtonsoft.Json.Schema" Version="4.0.1" />
   </ItemGroup>
   <ItemGroup>
@@ -21,16 +21,16 @@
   </ItemGroup>
   <ItemGroup Label="Microsoft">
     <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="9.0.9" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.7" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.7" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.7" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.9" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.9" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.9" />
     <PackageVersion Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
   </ItemGroup>
   <ItemGroup Label="Microsoft">
     <PackageVersion Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.9" />
-    <PackageVersion Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="9.0.7" />
-    <PackageVersion Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="9.0.7" />
-    <PackageVersion Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.7" />
+    <PackageVersion Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="9.0.9" />
+    <PackageVersion Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="9.0.9" />
+    <PackageVersion Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.9" />
     <PackageVersion Include="Microsoft.AspNetCore.Identity.UI" Version="9.0.7" />
   </ItemGroup>
   <ItemGroup>
@@ -42,7 +42,7 @@
     <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5" />
     <PackageVersion Include="coverlet.collector" Version="6.0.4" />
     <PackageVersion Include="Moq" Version="4.20.72" />
-    <PackageVersion Include="Testcontainers.Papercut" Version="4.6.0" />
+    <PackageVersion Include="Testcontainers.Papercut" Version="4.7.0" />
   </ItemGroup>
   <ItemGroup Label="Tests">
     <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="9.0.9" />
