@@ -8,16 +8,17 @@
     <PackageVersion Include="jcamp.FluentEmail.Core" Version="3.8.0" />
     <PackageVersion Include="jcamp.FluentEmail.MailKit" Version="3.8.0" />
     <PackageVersion Include="jcamp.FluentEmail.Smtp" Version="3.8.0" />
+    <PackageVersion Include="Microsoft.Build" Version="17.10.46" />
   </ItemGroup>
   <ItemGroup>
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageVersion Include="Newtonsoft.Json.Schema" Version="4.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.13.0" />
-    <PackageVersion Include="OpenTelemetry.Exporter.Console" Version="1.13.0" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.12.0" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.12.0" />
+    <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.13.1" />
+    <PackageVersion Include="OpenTelemetry.Exporter.Console" Version="1.13.1" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.13.0" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.13.0" />
   </ItemGroup>
   <ItemGroup Label="Microsoft">
     <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="9.0.9" />
@@ -42,7 +43,7 @@
     <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5" />
     <PackageVersion Include="coverlet.collector" Version="6.0.4" />
     <PackageVersion Include="Moq" Version="4.20.72" />
-    <PackageVersion Include="Testcontainers.Papercut" Version="4.7.0" />
+    <PackageVersion Include="Testcontainers.Papercut" Version="4.8.1" />
   </ItemGroup>
   <ItemGroup Label="Tests">
     <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="9.0.9" />
