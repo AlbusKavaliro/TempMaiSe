@@ -4,9 +4,9 @@
     "net9.0": {
       "Fluid.Core": {
         "type": "Direct",
-        "requested": "[2.25.0, )",
-        "resolved": "2.25.0",
-        "contentHash": "6fTSIHXgC+7fxFE4b3YADi0M4DmuWGDD8GUtZTqIXCcdqazbI1ve68EnpVQkgW6LbLkXL2Wo3s1aGT6vbmRsiA==",
+        "requested": "[2.30.0, )",
+        "resolved": "2.30.0",
+        "contentHash": "3G7N1gzSl7RBRAaSU4vSKWT9OjybTqiW2+SLOVFpngAFtyqNnVqu4nZvsh8cMHcTlFQSbjTSOCdKgbSBdE9Fsg==",
         "dependencies": {
           "Microsoft.Extensions.FileProviders.Abstractions": "9.0.0",
           "Parlot": "1.4.0",
@@ -15,18 +15,18 @@
       },
       "jcamp.FluentEmail.Core": {
         "type": "Direct",
-        "requested": "[3.8.0, )",
-        "resolved": "3.8.0",
-        "contentHash": "/GZxzUTNIA1B9bSOvcphA1vwor1DXWoO4G1FvFycoAlH2ZCXz02vF3C0iyubU76rzwuTXLDDJ2pz5NKCq7RrTg==",
+        "requested": "[4.0.0, )",
+        "resolved": "4.0.0",
+        "contentHash": "iwRyGXCRCTtlPbJnq29lY56y3XqcHz4Z01yOlAXIQblOtkS/MYOCt6jp7RuJ8HyO60u1NFZcEQA9SjAJKVGuPw==",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.2"
         }
       },
       "Newtonsoft.Json": {
         "type": "Direct",
-        "requested": "[13.0.3, )",
-        "resolved": "13.0.3",
-        "contentHash": "HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ=="
+        "requested": "[13.0.4, )",
+        "resolved": "13.0.4",
+        "contentHash": "pdgNNMai3zv51W5aq268sujXUyx7SNdE2bj1wZcWjAQrKMFZV260lbqYop1d2GM67JI1huLRwxo9ZqnfF/lC6A=="
       },
       "Newtonsoft.Json.Schema": {
         "type": "Direct",
@@ -45,8 +45,8 @@
       },
       "Microsoft.Extensions.DependencyInjection.Abstractions": {
         "type": "Transitive",
-        "resolved": "6.0.0",
-        "contentHash": "xlzi2IYREJH3/m6+lUrQlujzX8wDitm4QGnUu6kUXTQAWPuZY8i+ticFJbzfqaetLA6KR/rO6Ew/HuYD+bxifg=="
+        "resolved": "8.0.2",
+        "contentHash": "3iE7UF7MQkCv1cxzCahz+Y/guQbTqieyxyaWKhrRO91itI9cOKO76OHeQDahqG4MmW5umr3CcCvGmK92lWNlbg=="
       },
       "Microsoft.Extensions.FileProviders.Abstractions": {
         "type": "Transitive",

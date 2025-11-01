@@ -23,7 +23,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           global-json-file: global.json
       - name: Restore dependencies
@@ -33,7 +33,7 @@ jobs:
       - name: Test
         run: dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage"
       - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v5.5.0
+        uses: codecov/codecov-action@v5.5.1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: AlbusKavaliro/TempMaiSe
