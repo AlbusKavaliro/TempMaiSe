@@ -4,12 +4,12 @@
     "net10.0": {
       "Fluid.Core": {
         "type": "Direct",
-        "requested": "[2.30.0, )",
-        "resolved": "2.30.0",
-        "contentHash": "3G7N1gzSl7RBRAaSU4vSKWT9OjybTqiW2+SLOVFpngAFtyqNnVqu4nZvsh8cMHcTlFQSbjTSOCdKgbSBdE9Fsg==",
+        "requested": "[2.31.0, )",
+        "resolved": "2.31.0",
+        "contentHash": "HowYbawChrOQLgbezHp/pKY3TUdkNwrpz4CE9z2QHvx4769JXP5IjurpoPGFfz+73RcxxC04niukIXjygAYIzw==",
         "dependencies": {
-          "Parlot": "1.4.0",
-          "TimeZoneConverter": "7.0.0"
+          "Parlot": "1.5.2",
+          "TimeZoneConverter": "7.2.0"
         }
       },
       "jcamp.FluentEmail.Core": {
@@ -1076,8 +1076,8 @@
       },
       "Parlot": {
         "type": "Transitive",
-        "resolved": "1.4.0",
-        "contentHash": "oMftmeCsDPXbBgYQsVG4yuedvTVwSkZZHkKH1F4CpBkS9O99GrAV2sA8t7cC5CoVFPprmAFZThJMXjwu3ybgNg=="
+        "resolved": "1.5.2",
+        "contentHash": "idEOR6WU8WvnaDhFcj9PkWv8r/Actca8KfV9kw94//QEC0iQJVB9w/Z4ZLY8LxwSVMuNPuuLB649kCcVb+HrLw=="
       },
       "System.CodeDom": {
         "type": "Transitive",
@@ -1162,14 +1162,14 @@
       },
       "TimeZoneConverter": {
         "type": "Transitive",
-        "resolved": "7.0.0",
-        "contentHash": "sFbY65N/5GdsHx7nkdHFHUG+5Ar4W0w6Aks7Y2X+Q4NOTw6XyX2Il7jm+4tPkc//4mA3nG0RdxI8gKgoJitdLw=="
+        "resolved": "7.2.0",
+        "contentHash": "4Poqu79dTmacVETqUJ53g3x4U21V/cmWPSlehdsVE4Q00akavvlRq+SRjcg/CmfO9ibOCjRl6TeUV7hkC5RC4w=="
       },
       "albuskavaliro.tempmaise.mailer": {
         "type": "Project",
         "dependencies": {
           "AlbusKavaliro.TempMaiSe.Models": "[3.0.1-beta.1, )",
-          "Fluid.Core": "[2.30.0, )",
+          "Fluid.Core": "[2.31.0, )",
           "Newtonsoft.Json": "[13.0.4, )",
           "Newtonsoft.Json.Schema": "[4.0.1, )",
           "OneOf": "[3.0.271, )",
@@ -1210,12 +1210,12 @@
     "net9.0": {
       "Fluid.Core": {
         "type": "Direct",
-        "requested": "[2.30.0, )",
-        "resolved": "2.30.0",
-        "contentHash": "3G7N1gzSl7RBRAaSU4vSKWT9OjybTqiW2+SLOVFpngAFtyqNnVqu4nZvsh8cMHcTlFQSbjTSOCdKgbSBdE9Fsg==",
+        "requested": "[2.31.0, )",
+        "resolved": "2.31.0",
+        "contentHash": "HowYbawChrOQLgbezHp/pKY3TUdkNwrpz4CE9z2QHvx4769JXP5IjurpoPGFfz+73RcxxC04niukIXjygAYIzw==",
         "dependencies": {
-          "Parlot": "1.4.0",
-          "TimeZoneConverter": "7.0.0"
+          "Parlot": "1.5.2",
+          "TimeZoneConverter": "7.2.0"
         }
       },
       "jcamp.FluentEmail.Core": {
@@ -2281,8 +2281,8 @@
       },
       "Parlot": {
         "type": "Transitive",
-        "resolved": "1.4.0",
-        "contentHash": "oMftmeCsDPXbBgYQsVG4yuedvTVwSkZZHkKH1F4CpBkS9O99GrAV2sA8t7cC5CoVFPprmAFZThJMXjwu3ybgNg=="
+        "resolved": "1.5.2",
+        "contentHash": "idEOR6WU8WvnaDhFcj9PkWv8r/Actca8KfV9kw94//QEC0iQJVB9w/Z4ZLY8LxwSVMuNPuuLB649kCcVb+HrLw=="
       },
       "System.CodeDom": {
         "type": "Transitive",
@@ -2362,14 +2362,14 @@
       },
       "TimeZoneConverter": {
         "type": "Transitive",
-        "resolved": "7.0.0",
-        "contentHash": "sFbY65N/5GdsHx7nkdHFHUG+5Ar4W0w6Aks7Y2X+Q4NOTw6XyX2Il7jm+4tPkc//4mA3nG0RdxI8gKgoJitdLw=="
+        "resolved": "7.2.0",
+        "contentHash": "4Poqu79dTmacVETqUJ53g3x4U21V/cmWPSlehdsVE4Q00akavvlRq+SRjcg/CmfO9ibOCjRl6TeUV7hkC5RC4w=="
       },
       "albuskavaliro.tempmaise.mailer": {
         "type": "Project",
         "dependencies": {
           "AlbusKavaliro.TempMaiSe.Models": "[3.0.1-beta.1, )",
-          "Fluid.Core": "[2.30.0, )",
+          "Fluid.Core": "[2.31.0, )",
           "Newtonsoft.Json": "[13.0.4, )",
           "Newtonsoft.Json.Schema": "[4.0.1, )",
           "OneOf": "[3.0.271, )",
