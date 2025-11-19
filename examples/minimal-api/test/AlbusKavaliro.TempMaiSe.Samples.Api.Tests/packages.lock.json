@@ -1255,7 +1255,7 @@
       "albuskavaliro.tempmaise.mailer": {
         "type": "Project",
         "dependencies": {
-          "AlbusKavaliro.TempMaiSe.Models": "[3.0.1-beta.1, )",
+          "AlbusKavaliro.TempMaiSe.Models": "[3.0.1-beta.2, )",
           "Fluid.Core": "[2.31.0, )",
           "Newtonsoft.Json": "[13.0.4, )",
           "Newtonsoft.Json.Schema": "[4.0.1, )",
@@ -1269,7 +1269,7 @@
       "albuskavaliro.tempmaise.samples.api": {
         "type": "Project",
         "dependencies": {
-          "AlbusKavaliro.TempMaiSe.Mailer": "[3.0.1-beta.1, )",
+          "AlbusKavaliro.TempMaiSe.Mailer": "[3.0.1-beta.2, )",
           "Fluid.Core": "[2.31.0, )",
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "[10.0.0, )",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "[10.0.0, )",
@@ -1510,21 +1510,21 @@
       },
       "Microsoft.AspNetCore.Mvc.Testing": {
         "type": "Direct",
-        "requested": "[9.0.10, )",
-        "resolved": "9.0.10",
-        "contentHash": "Qj7gXJnHqN+5tQO8E7WtSUum55gQURgoOjU/ah6x9mPsYpzC38bm+U1nR2gnuMp8CFxV2PSly5n9JTjsvZmzyg==",
+        "requested": "[9.0.11, )",
+        "resolved": "9.0.11",
+        "contentHash": "/3knd0OxwBgJYseADcGkoX59my704zd9OWISWYsZ3TqfZkPt3rJQRPRl9R7YUgDMk+ViZ/I8rIucaDHukbvkEw==",
         "dependencies": {
-          "Microsoft.AspNetCore.TestHost": "9.0.10",
-          "Microsoft.Extensions.DependencyModel": "9.0.10"
+          "Microsoft.AspNetCore.TestHost": "9.0.11",
+          "Microsoft.Extensions.DependencyModel": "9.0.11"
         }
       },
       "Microsoft.EntityFrameworkCore.InMemory": {
         "type": "Direct",
-        "requested": "[9.0.10, )",
-        "resolved": "9.0.10",
-        "contentHash": "fRnQ7qcHNINRoErantws9k3CdjcYwvbx+fLB3ZDN/EDC7kt93J3fPB15aEbnum2JiFPbw3fgr9iOGWyxaRXD9Q==",
+        "requested": "[9.0.11, )",
+        "resolved": "9.0.11",
+        "contentHash": "0uoF/3xXeUqDw4dJOumUKpBSdIZF/E6nWigwDAjEvodDWp9++6/OvCvMj0aXoctPvTSeG/PwZfDqCIfmKhOqgg==",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore": "9.0.10"
+          "Microsoft.EntityFrameworkCore": "9.0.11"
         }
       },
       "Microsoft.NET.Test.Sdk": {
@@ -2054,8 +2054,8 @@
       },
       "Microsoft.AspNetCore.TestHost": {
         "type": "Transitive",
-        "resolved": "9.0.10",
-        "contentHash": "sKyEjqIRN7GXgrdX0c7Rx47iEtn4s632/GQCixqPU0uXnCfhzoUOHF7oXuSr88ljiG5gA2HBWlnk4S90W+gd1g=="
+        "resolved": "9.0.11",
+        "contentHash": "pvW13MfNK4VHS7q7ZBMipKk/JMKRIdgpo5moi12se63HlTkWIo6geae+sb+/b130zcSrBqOYHXO8vo9DwGZDSg=="
       },
       "Microsoft.Bcl.AsyncInterfaces": {
         "type": "Transitive",
@@ -2214,18 +2214,18 @@
       },
       "Microsoft.EntityFrameworkCore.Abstractions": {
         "type": "Transitive",
-        "resolved": "9.0.10",
-        "contentHash": "I3TWAs5Lbzmzu8S0T6qXhzBiO3CznYLrfE59W0npkqNHfWGH8CgA66LrHMWxWOXVTD4145QwYqiWNCdLwpJ1Ew=="
+        "resolved": "9.0.11",
+        "contentHash": "MHcdHm7vF71MfqYC68Jx9YfDAjxcuClGBZJk5zcJDRhVO4HgX+QFsOqcAisKWb20aBeF0IN1YkSktnEUf/tmLQ=="
       },
       "Microsoft.EntityFrameworkCore.Analyzers": {
         "type": "Transitive",
-        "resolved": "9.0.10",
-        "contentHash": "mXNl0Gg3l3zGrClLCHepB+b7rYVuFfB9qQJwya0dUSHFuR1T0jMD8KxuNVyhQSfoWIepanhzjcG8TUNGXOcU0Q=="
+        "resolved": "9.0.11",
+        "contentHash": "ccEk88YkXXWV+s5ZS+27UoY5YUVzgx8mq7kl+e05+AgJPGLhtmpQL26LxqBV1StJZEl2KaL8BxzABvXTXBAkoQ=="
       },
       "Microsoft.Extensions.DependencyModel": {
         "type": "Transitive",
-        "resolved": "9.0.10",
-        "contentHash": "qCIWxEPt6Y9Z/Vx2R6JsfX7pwxIHC2GYlkcFbTox3MpsiNexyLkvPFTNsfmAaKpjTZ6FhNmvY3BdrwLX4+X0cQ=="
+        "resolved": "9.0.11",
+        "contentHash": "DaBLlKcD5AYFLEeX7M07Q0vWOEBd86KYXOb+5ZRdQ1jYtN39cJd6fftxdNbRazEYQc9QqsAZiqKb9ub0gA+q+Q=="
       },
       "Microsoft.NET.StringTools": {
         "type": "Transitive",
@@ -2654,7 +2654,7 @@
       "albuskavaliro.tempmaise.mailer": {
         "type": "Project",
         "dependencies": {
-          "AlbusKavaliro.TempMaiSe.Models": "[3.0.1-beta.1, )",
+          "AlbusKavaliro.TempMaiSe.Models": "[3.0.1-beta.2, )",
           "Fluid.Core": "[2.31.0, )",
           "Newtonsoft.Json": "[13.0.4, )",
           "Newtonsoft.Json.Schema": "[4.0.1, )",
@@ -2668,13 +2668,13 @@
       "albuskavaliro.tempmaise.samples.api": {
         "type": "Project",
         "dependencies": {
-          "AlbusKavaliro.TempMaiSe.Mailer": "[3.0.1-beta.1, )",
+          "AlbusKavaliro.TempMaiSe.Mailer": "[3.0.1-beta.2, )",
           "Fluid.Core": "[2.31.0, )",
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "[9.0.10, )",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "[9.0.10, )",
-          "Microsoft.EntityFrameworkCore": "[9.0.10, )",
+          "Microsoft.EntityFrameworkCore": "[9.0.11, )",
           "Microsoft.EntityFrameworkCore.Design": "[9.0.10, )",
-          "Microsoft.EntityFrameworkCore.InMemory": "[9.0.10, )",
+          "Microsoft.EntityFrameworkCore.InMemory": "[9.0.11, )",
           "Microsoft.EntityFrameworkCore.Tools": "[9.0.10, )",
           "Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore": "[9.0.10, )",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "[9.0.0, )",
@@ -2757,12 +2757,12 @@
       },
       "Microsoft.EntityFrameworkCore": {
         "type": "CentralTransitive",
-        "requested": "[9.0.10, )",
-        "resolved": "9.0.10",
-        "contentHash": "WjjxVyOTVs85V7SUe+lZjtGOEeVzF4RO8amrqL4adgbyThNq7vGCFzPw8buZj44gHeQYD5V/uZ/6XuqG9Jq+kA==",
+        "requested": "[9.0.11, )",
+        "resolved": "9.0.11",
+        "contentHash": "lqqV6JEmVv8s0Y/25RnKtYZ6qL+Vz14wEsrBV1ubVUyzDGrOp+10XJ54HNuRLUzdvzVPR2uQ5li/CPrBj0kQHg==",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Abstractions": "9.0.10",
-          "Microsoft.EntityFrameworkCore.Analyzers": "9.0.10"
+          "Microsoft.EntityFrameworkCore.Abstractions": "9.0.11",
+          "Microsoft.EntityFrameworkCore.Analyzers": "9.0.11"
         }
       },
       "Microsoft.EntityFrameworkCore.Design": {
