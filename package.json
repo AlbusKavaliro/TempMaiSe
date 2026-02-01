@@ -5,7 +5,7 @@
         "@droidsolutions-oss/semantic-release-update-file": "^1.4.0",
         "@semantic-release/changelog": "^6.0.3",
         "@semantic-release/git": "^10.0.1",
-        "semantic-release": "^25.0.1"
+        "semantic-release": "^25.0.3"
     },
     "release": {
         "branches": [
@@ -67,5 +67,5 @@
             }
         ]
     },
-    "version": "3.1.0"
+    "version": "3.1.1-beta.2"
 }
