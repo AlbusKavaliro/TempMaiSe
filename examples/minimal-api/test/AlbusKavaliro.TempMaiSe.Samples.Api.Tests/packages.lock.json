@@ -1986,22 +1986,6 @@
         "resolved": "1.7.8",
         "contentHash": "sPy10x527Ph16S2u0yGME4S6ohBKJ69WfjeGG/bvELYeZVmJdKjxgnlL8cJJJLGV/cZIRqSfB12UDB8ICakOog=="
       },
-      "Microsoft.Build.Tasks.Core": {
-        "type": "Transitive",
-        "resolved": "17.7.2",
-        "contentHash": "CmI+mDQ44GWVv0mxFcGYlvek838kK3PgNvXPo/1/Q5/Tc97tajO611uZAj2wNfwJ1kjsCef2Mza4d+SVSyd3Mg==",
-        "dependencies": {
-          "Microsoft.Build.Framework": "17.7.2",
-          "Microsoft.Build.Utilities.Core": "17.7.2",
-          "Microsoft.NET.StringTools": "17.7.2",
-          "Microsoft.VisualStudio.Setup.Configuration.Interop": "3.2.2146",
-          "System.CodeDom": "7.0.0",
-          "System.Configuration.ConfigurationManager": "7.0.0",
-          "System.Resources.Extensions": "7.0.0",
-          "System.Security.Cryptography.Pkcs": "7.0.2",
-          "System.Security.Permissions": "7.0.0"
-        }
-      },
       "Microsoft.Build.Utilities.Core": {
         "type": "Transitive",
         "resolved": "17.11.48",
@@ -2816,6 +2800,22 @@
           "System.Reflection.MetadataLoadContext": "10.0.1",
           "System.Text.Json": "10.0.1",
           "System.Threading.Tasks.Dataflow": "10.0.1"
+        }
+      },
+      "Microsoft.Build.Tasks.Core": {
+        "type": "CentralTransitive",
+        "requested": "[17.8.43, )",
+        "resolved": "17.8.43",
+        "contentHash": "YQFkNzdmghoi2cD2MftTRSS/2aWUMBnQm1fRa1f3Dn8eqL35CsjgE1LuTj6Hs+kXWyagaV3FX1eP/ztkARCjHQ==",
+        "dependencies": {
+          "Microsoft.Build.Framework": "17.8.43",
+          "Microsoft.Build.Utilities.Core": "17.8.43",
+          "Microsoft.NET.StringTools": "17.8.43",
+          "Microsoft.VisualStudio.Setup.Configuration.Interop": "3.2.2146",
+          "System.CodeDom": "7.0.0",
+          "System.Configuration.ConfigurationManager": "7.0.0",
+          "System.Resources.Extensions": "7.0.0",
+          "System.Security.Cryptography.Pkcs": "7.0.2"
         }
       },
       "Microsoft.EntityFrameworkCore": {
