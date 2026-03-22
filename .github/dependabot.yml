@@ -50,3 +50,28 @@ updates:
       prefix: fix
       prefix-development: chore
       include: scope
+
+  - package-ecosystem: nuget
+    directory: /examples/minimal-api/src/AlbusKavaliro.TempMaiSe.Samples.Api
+    schedule:
+      interval: daily
+
+  - package-ecosystem: nuget
+    directory: /examples/minimal-api/test/AlbusKavaliro.TempMaiSe.Samples.Api.Tests
+    schedule:
+      interval: daily
+
+  - package-ecosystem: nuget
+    directory: /src/AlbusKavaliro.TempMaiSe.Mailer
+    schedule:
+      interval: daily
+
+  - package-ecosystem: nuget
+    directory: /src/AlbusKavaliro.TempMaiSe.Models
+    schedule:
+      interval: daily
+
+  - package-ecosystem: nuget
+    directory: /test/AlbusKavaliro.TempMaiSe.Tests
+    schedule:
+      interval: daily
