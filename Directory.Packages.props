@@ -9,6 +9,7 @@
     <PackageVersion Include="jcamp.FluentEmail.Core" Version="4.0.0" />
     <PackageVersion Include="jcamp.FluentEmail.MailKit" Version="4.0.0" />
     <PackageVersion Include="jcamp.FluentEmail.Smtp" Version="4.0.0" />
+    <PackageVersion Include="MailKit" Version="4.16.0" />
     <!-- Bumped to satisfy Microsoft.VisualStudio.Web.CodeGeneration.Design dependency (>= 17.11.4) -->
     <PackageVersion Include="Microsoft.Build" Version="18.4.0" />
     <PackageVersion Include="Microsoft.Build.Tasks.Core" Version="18.4.0" />
