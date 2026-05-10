@@ -42,7 +42,7 @@ public class MailServiceTests
         );
 
         // Act
-        OneOf<SendResponse, NotFound, List<ValidationError>> result = await mailService.SendMailAsync(templateId, data).ConfigureAwait(true);
+        OneOf<SendResponse, NotFound, List<ValidationError>> result = await mailService.SendMailAsync(templateId, data, TestContext.Current.CancellationToken).ConfigureAwait(true);
 
         // Assert
         Assert.IsType<NotFound>(result.Value);
