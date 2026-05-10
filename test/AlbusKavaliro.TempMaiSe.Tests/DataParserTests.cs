@@ -18,7 +18,7 @@ public class DataParserTests
         using var stream = new MemoryStream();
 
         // Act & Assert
-        _ = await Assert.ThrowsAsync<ArgumentException>(nameof(jsonSchema), () => _parser.ParseAsync(jsonSchema, stream)).ConfigureAwait(true);
+        _ = await Assert.ThrowsAsync<ArgumentException>(nameof(jsonSchema), () => _parser.ParseAsync(jsonSchema, stream, TestContext.Current.CancellationToken)).ConfigureAwait(true);
     }
 
     [Fact]
@@ -28,7 +28,7 @@ public class DataParserTests
         using var stream = new MemoryStream();
 
         // Act & Assert
-        _ = await Assert.ThrowsAsync<ArgumentNullException>("jsonSchema", () => _parser.ParseAsync(null, stream)).ConfigureAwait(true);
+        _ = await Assert.ThrowsAsync<ArgumentNullException>("jsonSchema", () => _parser.ParseAsync(null, stream, TestContext.Current.CancellationToken)).ConfigureAwait(true);
     }
 
     [Fact]
@@ -38,7 +38,7 @@ public class DataParserTests
         const string jsonSchema = "{}";
 
         // Act & Assert
-        _ = await Assert.ThrowsAsync<ArgumentNullException>("data", () => _parser.ParseAsync(jsonSchema, null)).ConfigureAwait(true);
+        _ = await Assert.ThrowsAsync<ArgumentNullException>("data", () => _parser.ParseAsync(jsonSchema, null, TestContext.Current.CancellationToken)).ConfigureAwait(true);
     }
 
     [Fact]
@@ -75,11 +75,11 @@ public class DataParserTests
             }
         }
         """).ConfigureAwait(true);
-        await writer.FlushAsync().ConfigureAwait(true);
+        await writer.FlushAsync(TestContext.Current.CancellationToken).ConfigureAwait(true);
         data.Position = 0;
 
         // Act
-        OneOf.OneOf<MailInformation, List<ValidationError>> mailInformationOrError = await _parser.ParseAsync(jsonSchema, data).ConfigureAwait(true);
+        OneOf.OneOf<MailInformation, List<ValidationError>> mailInformationOrError = await _parser.ParseAsync(jsonSchema, data, TestContext.Current.CancellationToken).ConfigureAwait(true);
 
         // Assert
         Assert.False(mailInformationOrError.IsT0);
@@ -132,11 +132,11 @@ public class DataParserTests
             }
         }
         """).ConfigureAwait(true);
-        await writer.FlushAsync().ConfigureAwait(true);
+        await writer.FlushAsync(TestContext.Current.CancellationToken).ConfigureAwait(true);
         data.Position = 0;
 
         // Act
-        OneOf.OneOf<MailInformation, List<ValidationError>> mailInformationOrError = await _parser.ParseAsync(jsonSchema, data).ConfigureAwait(true);
+        OneOf.OneOf<MailInformation, List<ValidationError>> mailInformationOrError = await _parser.ParseAsync(jsonSchema, data, TestContext.Current.CancellationToken).ConfigureAwait(true);
 
         // Assert
         Assert.True(mailInformationOrError.IsT0);
