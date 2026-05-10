@@ -29,7 +29,7 @@ public class SendMailTests : IClassFixture<CustomWebApplicationFactory<Program>>
         HttpClient client = _factory.CreateClient();
 
         // Act
-        HttpResponseMessage response = await client.PostAsJsonAsync(new Uri("/send/4711", UriKind.Relative), "dummy").ConfigureAwait(true);
+        HttpResponseMessage response = await client.PostAsJsonAsync(new Uri("/send/4711", UriKind.Relative), "dummy", TestContext.Current.CancellationToken).ConfigureAwait(true);
 
         // Assert
         Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
@@ -39,9 +39,9 @@ public class SendMailTests : IClassFixture<CustomWebApplicationFactory<Program>>
     public async Task Post_Send_Returns_Success_For_Good_Template_Id_Simple_Object()
     {
         // Arrange
-        PapercutContainer container = new PapercutBuilder()
+        PapercutContainer container = CreatePapercutBuilder()
             .Build();
-        await container.StartAsync().ConfigureAwait(true);
+        await container.StartAsync(TestContext.Current.CancellationToken).ConfigureAwait(true);
 
         HttpClient client = _factory
             .WithWebHostBuilder(configuration =>
@@ -97,15 +97,15 @@ public class SendMailTests : IClassFixture<CustomWebApplicationFactory<Program>>
 
         // Act
         using HttpContent content = new StringContent(JsonSerializer.Serialize(mail), Encoding.UTF8, "application/json");
-        HttpResponseMessage response = await client.PostAsync(new Uri("/send/42", UriKind.Relative), content).ConfigureAwait(true);
+        HttpResponseMessage response = await client.PostAsync(new Uri("/send/42", UriKind.Relative), content, TestContext.Current.CancellationToken).ConfigureAwait(true);
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         using HttpClient httpClient = new();
         httpClient.BaseAddress = new Uri(container.GetBaseAddress());
-        PapercutMessageList? messages = await httpClient.GetFromJsonAsync<PapercutMessageList>(new Uri("/api/messages", UriKind.Relative)).ConfigureAwait(true);
+        PapercutMessageList? messages = await httpClient.GetFromJsonAsync<PapercutMessageList>(new Uri("/api/messages", UriKind.Relative), TestContext.Current.CancellationToken).ConfigureAwait(true);
         Assert.Equal(1, messages!.TotalMessageCount);
-        PapercutMessage? message = await httpClient.GetFromJsonAsync<PapercutMessage>(new Uri($"/api/messages/{messages.Messages.Single().Id}", UriKind.Relative)).ConfigureAwait(true);
+        PapercutMessage? message = await httpClient.GetFromJsonAsync<PapercutMessage>(new Uri($"/api/messages/{messages.Messages.Single().Id}", UriKind.Relative), TestContext.Current.CancellationToken).ConfigureAwait(true);
         Assert.NotNull(message);
         Assert.Equal("Inheritance from Uncle Bob", message.Subject);
         Assert.Equal("Please send me 1.000 $. My paypal is paypal@example.net", message.TextBody);
@@ -125,9 +125,9 @@ public class SendMailTests : IClassFixture<CustomWebApplicationFactory<Program>>
     public async Task Post_Send_Returns_Error_For_Missing_Required_Property()
     {
         // Arrange
-        PapercutContainer container = new PapercutBuilder()
+        PapercutContainer container = CreatePapercutBuilder()
             .Build();
-        await container.StartAsync().ConfigureAwait(true);
+        await container.StartAsync(TestContext.Current.CancellationToken).ConfigureAwait(true);
 
         HttpClient client = _factory
             .WithWebHostBuilder(configuration =>
@@ -179,12 +179,12 @@ public class SendMailTests : IClassFixture<CustomWebApplicationFactory<Program>>
 
         // Act
         using HttpContent content = new StringContent(JsonSerializer.Serialize(mail), Encoding.UTF8, "application/json");
-        HttpResponseMessage response = await client.PostAsync(new Uri("/send/69", UriKind.Relative), content).ConfigureAwait(true);
+        HttpResponseMessage response = await client.PostAsync(new Uri("/send/69", UriKind.Relative), content, TestContext.Current.CancellationToken).ConfigureAwait(true);
 
         // Assert
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
         Assert.Equal("application/problem+json", response.Content.Headers.ContentType?.MediaType);
-        string error = await response.Content.ReadAsStringAsync().ConfigureAwait(true);
+        string error = await response.Content.ReadAsStringAsync(TestContext.Current.CancellationToken).ConfigureAwait(true);
         Assert.Contains("Required properties are missing from object: email.", error, StringComparison.InvariantCultureIgnoreCase);
     }
 
@@ -192,9 +192,9 @@ public class SendMailTests : IClassFixture<CustomWebApplicationFactory<Program>>
     public async Task Post_Send_Returns_Success_For_Good_Template_Id_Complex_Object()
     {
         // Arrange
-        PapercutContainer container = new PapercutBuilder()
+        PapercutContainer container = CreatePapercutBuilder()
             .Build();
-        await container.StartAsync().ConfigureAwait(true);
+        await container.StartAsync(TestContext.Current.CancellationToken).ConfigureAwait(true);
 
         HttpClient client = _factory
             .WithWebHostBuilder(configuration =>
@@ -284,15 +284,15 @@ you received a coupon for a free gift. Please use it within the next 24 hours.</
 
         // Act
         using HttpContent content = new StringContent(JsonSerializer.Serialize(mail), Encoding.UTF8, "application/json");
-        HttpResponseMessage response = await client.PostAsync(new Uri("/send/1337", UriKind.Relative), content).ConfigureAwait(true);
+        HttpResponseMessage response = await client.PostAsync(new Uri("/send/1337", UriKind.Relative), content, TestContext.Current.CancellationToken).ConfigureAwait(true);
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         using HttpClient httpClient = new();
         httpClient.BaseAddress = new Uri(container.GetBaseAddress());
-        PapercutMessageList? messages = await httpClient.GetFromJsonAsync<PapercutMessageList>(new Uri("/api/messages", UriKind.Relative)).ConfigureAwait(true);
+        PapercutMessageList? messages = await httpClient.GetFromJsonAsync<PapercutMessageList>(new Uri("/api/messages", UriKind.Relative), TestContext.Current.CancellationToken).ConfigureAwait(true);
         Assert.Equal(1, messages!.TotalMessageCount);
-        PapercutMessage? message = await httpClient.GetFromJsonAsync<PapercutMessage>(new Uri($"/api/messages/{messages.Messages.Single().Id}", UriKind.Relative)).ConfigureAwait(true);
+        PapercutMessage? message = await httpClient.GetFromJsonAsync<PapercutMessage>(new Uri($"/api/messages/{messages.Messages.Single().Id}", UriKind.Relative), TestContext.Current.CancellationToken).ConfigureAwait(true);
         Assert.NotNull(message);
         Assert.Equal("Erika Mustermann — Claim your free gift now", message.Subject);
         Assert.Equal(
@@ -324,9 +324,9 @@ Neo</p>
     public async Task Post_Send_Returns_Success_For_Good_Template_Id_Complex_Object_With_Attachment()
     {
         // Arrange
-        PapercutContainer container = new PapercutBuilder()
+        PapercutContainer container = CreatePapercutBuilder()
             .Build();
-        await container.StartAsync().ConfigureAwait(true);
+        await container.StartAsync(TestContext.Current.CancellationToken).ConfigureAwait(true);
 
         HttpClient client = _factory
             .WithWebHostBuilder(configuration =>
@@ -424,15 +424,15 @@ you received a coupon for a free gift. Please use it within the next 24 hours.</
 
         // Act
         using HttpContent content = new StringContent(JsonSerializer.Serialize(mail), Encoding.UTF8, "application/json");
-        HttpResponseMessage response = await client.PostAsync(new Uri("/send/420", UriKind.Relative), content).ConfigureAwait(true);
+        HttpResponseMessage response = await client.PostAsync(new Uri("/send/420", UriKind.Relative), content, TestContext.Current.CancellationToken).ConfigureAwait(true);
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         using HttpClient httpClient = new();
         httpClient.BaseAddress = new Uri(container.GetBaseAddress());
-        PapercutMessageList? messages = await httpClient.GetFromJsonAsync<PapercutMessageList>(new Uri("/api/messages", UriKind.Relative)).ConfigureAwait(true);
+        PapercutMessageList? messages = await httpClient.GetFromJsonAsync<PapercutMessageList>(new Uri("/api/messages", UriKind.Relative), TestContext.Current.CancellationToken).ConfigureAwait(true);
         Assert.Equal(1, messages!.TotalMessageCount);
-        PapercutMessage? message = await httpClient.GetFromJsonAsync<PapercutMessage>(new Uri($"/api/messages/{messages.Messages.Single().Id}", UriKind.Relative)).ConfigureAwait(true);
+        PapercutMessage? message = await httpClient.GetFromJsonAsync<PapercutMessage>(new Uri($"/api/messages/{messages.Messages.Single().Id}", UriKind.Relative), TestContext.Current.CancellationToken).ConfigureAwait(true);
         Assert.NotNull(message);
         Assert.Equal("Erika Mustermann — Claim your free gift now", message.Subject);
         Assert.Equal(
@@ -467,9 +467,9 @@ Neo</p>
     public async Task Post_Send_Returns_Success_For_Good_Template_Id_Complex_Object_With_Inline_Attachment()
     {
         // Arrange
-        PapercutContainer container = new PapercutBuilder()
+        PapercutContainer container = CreatePapercutBuilder()
             .Build();
-        await container.StartAsync().ConfigureAwait(true);
+        await container.StartAsync(TestContext.Current.CancellationToken).ConfigureAwait(true);
 
         HttpClient client = _factory
             .WithWebHostBuilder(configuration =>
@@ -579,15 +579,15 @@ you received a coupon for a free gift. Please use it within the next 24 hours.</
 
         // Act
         using HttpContent content = new StringContent(JsonSerializer.Serialize(mail), Encoding.UTF8, "application/json");
-        HttpResponseMessage response = await client.PostAsync(new Uri("/send/31337", UriKind.Relative), content).ConfigureAwait(true);
+        HttpResponseMessage response = await client.PostAsync(new Uri("/send/31337", UriKind.Relative), content, TestContext.Current.CancellationToken).ConfigureAwait(true);
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         using HttpClient httpClient = new();
         httpClient.BaseAddress = new Uri(container.GetBaseAddress());
-        PapercutMessageList? messages = await httpClient.GetFromJsonAsync<PapercutMessageList>(new Uri("/api/messages", UriKind.Relative)).ConfigureAwait(true);
+        PapercutMessageList? messages = await httpClient.GetFromJsonAsync<PapercutMessageList>(new Uri("/api/messages", UriKind.Relative), TestContext.Current.CancellationToken).ConfigureAwait(true);
         Assert.Equal(1, messages!.TotalMessageCount);
-        PapercutMessage? message = await httpClient.GetFromJsonAsync<PapercutMessage>(new Uri($"/api/messages/{messages.Messages.Single().Id}", UriKind.Relative)).ConfigureAwait(true);
+        PapercutMessage? message = await httpClient.GetFromJsonAsync<PapercutMessage>(new Uri($"/api/messages/{messages.Messages.Single().Id}", UriKind.Relative), TestContext.Current.CancellationToken).ConfigureAwait(true);
         Assert.NotNull(message);
         Assert.Equal("Erika Mustermann — Claim your free gift now", message.Subject);
         Assert.Equal(
@@ -631,9 +631,9 @@ Neo</p>
     public async Task Post_Send_Returns_Success_For_Good_Template_With_Custom_Fluid_Tag()
     {
         // Arrange
-        PapercutContainer container = new PapercutBuilder()
+        PapercutContainer container = CreatePapercutBuilder()
             .Build();
-        await container.StartAsync().ConfigureAwait(true);
+        await container.StartAsync(TestContext.Current.CancellationToken).ConfigureAwait(true);
 
         HttpClient client = _factory
             .WithWebHostBuilder(configuration =>
@@ -693,15 +693,15 @@ Neo</p>
 
         // Act
         using HttpContent content = new StringContent(JsonSerializer.Serialize(mail), Encoding.UTF8, "application/json");
-        HttpResponseMessage response = await client.PostAsync(new Uri("/send/31338", UriKind.Relative), content).ConfigureAwait(true);
+        HttpResponseMessage response = await client.PostAsync(new Uri("/send/31338", UriKind.Relative), content, TestContext.Current.CancellationToken).ConfigureAwait(true);
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         using HttpClient httpClient = new();
         httpClient.BaseAddress = new Uri(container.GetBaseAddress());
-        PapercutMessageList? messages = await httpClient.GetFromJsonAsync<PapercutMessageList>(new Uri("/api/messages", UriKind.Relative)).ConfigureAwait(true);
+        PapercutMessageList? messages = await httpClient.GetFromJsonAsync<PapercutMessageList>(new Uri("/api/messages", UriKind.Relative), TestContext.Current.CancellationToken).ConfigureAwait(true);
         Assert.Equal(1, messages!.TotalMessageCount);
-        PapercutMessage? message = await httpClient.GetFromJsonAsync<PapercutMessage>(new Uri($"/api/messages/{messages.Messages.Single().Id}", UriKind.Relative)).ConfigureAwait(true);
+        PapercutMessage? message = await httpClient.GetFromJsonAsync<PapercutMessage>(new Uri($"/api/messages/{messages.Messages.Single().Id}", UriKind.Relative), TestContext.Current.CancellationToken).ConfigureAwait(true);
         Assert.NotNull(message);
         Assert.Equal("Erika Mustermann — Claim your free gift now", message.Subject);
         Assert.Equal("""<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAAQ0lEQVR4nGKanbxR0iCpx+Lsq7MfGBKt0pls/206J81Y9Yrx7rta3mMP0lrvGci3MjNw/wj989bz5ksPzqOAAAAA//94+BjST+Y61wAAAABJRU5ErkJggg==" alt="Dummy"></p>""", message.HtmlBody);
@@ -718,9 +718,9 @@ Neo</p>
     public async Task Post_Send_Returns_Success_For_Good_Template_With_Custom_Fluid_Tag_As_Attachment()
     {
         // Arrange
-        PapercutContainer container = new PapercutBuilder()
+        PapercutContainer container = CreatePapercutBuilder()
             .Build();
-        await container.StartAsync().ConfigureAwait(true);
+        await container.StartAsync(TestContext.Current.CancellationToken).ConfigureAwait(true);
 
         HttpClient client = _factory
             .WithWebHostBuilder(configuration =>
@@ -780,15 +780,15 @@ Neo</p>
 
         // Act
         using HttpContent content = new StringContent(JsonSerializer.Serialize(mail), Encoding.UTF8, "application/json");
-        HttpResponseMessage response = await client.PostAsync(new Uri("/send/31339", UriKind.Relative), content).ConfigureAwait(true);
+        HttpResponseMessage response = await client.PostAsync(new Uri("/send/31339", UriKind.Relative), content, TestContext.Current.CancellationToken).ConfigureAwait(true);
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         using HttpClient httpClient = new();
         httpClient.BaseAddress = new Uri(container.GetBaseAddress());
-        PapercutMessageList? messages = await httpClient.GetFromJsonAsync<PapercutMessageList>(new Uri("/api/messages", UriKind.Relative)).ConfigureAwait(true);
+        PapercutMessageList? messages = await httpClient.GetFromJsonAsync<PapercutMessageList>(new Uri("/api/messages", UriKind.Relative), TestContext.Current.CancellationToken).ConfigureAwait(true);
         Assert.Equal(1, messages!.TotalMessageCount);
-        PapercutMessage? message = await httpClient.GetFromJsonAsync<PapercutMessage>(new Uri($"/api/messages/{messages.Messages.Single().Id}", UriKind.Relative)).ConfigureAwait(true);
+        PapercutMessage? message = await httpClient.GetFromJsonAsync<PapercutMessage>(new Uri($"/api/messages/{messages.Messages.Single().Id}", UriKind.Relative), TestContext.Current.CancellationToken).ConfigureAwait(true);
         Assert.NotNull(message);
         Assert.Equal("Erika Mustermann — Claim your free gift now", message.Subject);
         Assert.Matches("""<p><img src="cid:[0-9a-z]{64}" alt="Logo"></p>""", message.HtmlBody);
@@ -807,9 +807,9 @@ Neo</p>
     public async Task Post_Send_Returns_Success_For_Good_Template_Id_Simple_Object_Signature()
     {
         // Arrange
-        PapercutContainer container = new PapercutBuilder()
+        PapercutContainer container = CreatePapercutBuilder()
             .Build();
-        await container.StartAsync().ConfigureAwait(true);
+        await container.StartAsync(TestContext.Current.CancellationToken).ConfigureAwait(true);
 
         HttpClient client = _factory
             .WithWebHostBuilder(configuration =>
@@ -896,15 +896,15 @@ Phone +493023125{{ extension }}
 
         // Act
         using HttpContent content = new StringContent(JsonSerializer.Serialize(mail), Encoding.UTF8, "application/json");
-        HttpResponseMessage response = await client.PostAsync(new Uri("/send/7", UriKind.Relative), content).ConfigureAwait(true);
+        HttpResponseMessage response = await client.PostAsync(new Uri("/send/7", UriKind.Relative), content, TestContext.Current.CancellationToken).ConfigureAwait(true);
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         using HttpClient httpClient = new();
         httpClient.BaseAddress = new Uri(container.GetBaseAddress());
-        PapercutMessageList? messages = await httpClient.GetFromJsonAsync<PapercutMessageList>(new Uri("/api/messages", UriKind.Relative)).ConfigureAwait(true);
+        PapercutMessageList? messages = await httpClient.GetFromJsonAsync<PapercutMessageList>(new Uri("/api/messages", UriKind.Relative), TestContext.Current.CancellationToken).ConfigureAwait(true);
         Assert.Equal(1, messages!.TotalMessageCount);
-        PapercutMessage? message = await httpClient.GetFromJsonAsync<PapercutMessage>(new Uri($"/api/messages/{messages.Messages.Single().Id}", UriKind.Relative)).ConfigureAwait(true);
+        PapercutMessage? message = await httpClient.GetFromJsonAsync<PapercutMessage>(new Uri($"/api/messages/{messages.Messages.Single().Id}", UriKind.Relative), TestContext.Current.CancellationToken).ConfigureAwait(true);
         Assert.NotNull(message);
         Assert.Equal("Inheritance from Uncle Bob", message.Subject);
         Assert.Equal(
@@ -938,9 +938,9 @@ Phone +493023125666
     public async Task Post_Send_Returns_Success_For_Good_Template_Id_Simple_Object_Signature_No_Parameter()
     {
         // Arrange
-        PapercutContainer container = new PapercutBuilder()
+        PapercutContainer container = CreatePapercutBuilder()
             .Build();
-        await container.StartAsync().ConfigureAwait(true);
+        await container.StartAsync(TestContext.Current.CancellationToken).ConfigureAwait(true);
 
         HttpClient client = _factory
             .WithWebHostBuilder(configuration =>
@@ -1023,15 +1023,15 @@ Dummy.
 
         // Act
         using HttpContent content = new StringContent(JsonSerializer.Serialize(mail), Encoding.UTF8, "application/json");
-        HttpResponseMessage response = await client.PostAsync(new Uri("/send/9", UriKind.Relative), content).ConfigureAwait(true);
+        HttpResponseMessage response = await client.PostAsync(new Uri("/send/9", UriKind.Relative), content, TestContext.Current.CancellationToken).ConfigureAwait(true);
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         using HttpClient httpClient = new();
         httpClient.BaseAddress = new Uri(container.GetBaseAddress());
-        PapercutMessageList? messages = await httpClient.GetFromJsonAsync<PapercutMessageList>(new Uri("/api/messages", UriKind.Relative)).ConfigureAwait(true);
+        PapercutMessageList? messages = await httpClient.GetFromJsonAsync<PapercutMessageList>(new Uri("/api/messages", UriKind.Relative), TestContext.Current.CancellationToken).ConfigureAwait(true);
         Assert.Equal(1, messages!.TotalMessageCount);
-        PapercutMessage? message = await httpClient.GetFromJsonAsync<PapercutMessage>(new Uri($"/api/messages/{messages.Messages.Single().Id}", UriKind.Relative)).ConfigureAwait(true);
+        PapercutMessage? message = await httpClient.GetFromJsonAsync<PapercutMessage>(new Uri($"/api/messages/{messages.Messages.Single().Id}", UriKind.Relative), TestContext.Current.CancellationToken).ConfigureAwait(true);
         Assert.NotNull(message);
         Assert.Equal("Inheritance from Uncle Bob", message.Subject);
         Assert.Equal(
@@ -1062,9 +1062,9 @@ Dummy.
     public async Task Post_Send_Returns_Success_For_Good_Template_Id_Simple_Object_Signature_With_Inline_Image()
     {
         // Arrange
-        PapercutContainer container = new PapercutBuilder()
+        PapercutContainer container = new PapercutBuilder("docker.io/changemakerstudiosus/papercut-smtp:7.7")
             .Build();
-        await container.StartAsync().ConfigureAwait(true);
+        await container.StartAsync(TestContext.Current.CancellationToken).ConfigureAwait(true);
 
         HttpClient client = _factory
             .WithWebHostBuilder(configuration =>
@@ -1152,15 +1152,15 @@ Dummy.
 
         // Act
         using HttpContent content = new StringContent(JsonSerializer.Serialize(mail), Encoding.UTF8, "application/json");
-        HttpResponseMessage response = await client.PostAsync(new Uri("/send/10", UriKind.Relative), content).ConfigureAwait(true);
+        HttpResponseMessage response = await client.PostAsync(new Uri("/send/10", UriKind.Relative), content, TestContext.Current.CancellationToken).ConfigureAwait(true);
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         using HttpClient httpClient = new();
         httpClient.BaseAddress = new Uri(container.GetBaseAddress());
-        PapercutMessageList? messages = await httpClient.GetFromJsonAsync<PapercutMessageList>(new Uri("/api/messages", UriKind.Relative)).ConfigureAwait(true);
+        PapercutMessageList? messages = await httpClient.GetFromJsonAsync<PapercutMessageList>(new Uri("/api/messages", UriKind.Relative), TestContext.Current.CancellationToken).ConfigureAwait(true);
         Assert.Equal(1, messages!.TotalMessageCount);
-        PapercutMessage? message = await httpClient.GetFromJsonAsync<PapercutMessage>(new Uri($"/api/messages/{messages.Messages.Single().Id}", UriKind.Relative)).ConfigureAwait(true);
+        PapercutMessage? message = await httpClient.GetFromJsonAsync<PapercutMessage>(new Uri($"/api/messages/{messages.Messages.Single().Id}", UriKind.Relative), TestContext.Current.CancellationToken).ConfigureAwait(true);
         Assert.NotNull(message);
         Assert.Equal("Inheritance from Uncle Bob", message.Subject);
         Assert.Equal(
@@ -1187,6 +1187,8 @@ Dummy.
         Assert.NotNull(message.Bcc);
         Assert.Contains(message.Bcc, address => address.Address == "prince@example.org");
     }
+
+    private static PapercutBuilder CreatePapercutBuilder() => new("docker.io/changemakerstudiosus/papercut-smtp:7.7");
 
     private sealed record CouponItem(string Name);
 }
