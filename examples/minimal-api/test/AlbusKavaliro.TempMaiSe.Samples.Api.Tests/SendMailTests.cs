@@ -39,7 +39,7 @@ public class SendMailTests : IClassFixture<CustomWebApplicationFactory<Program>>
     public async Task Post_Send_Returns_Success_For_Good_Template_Id_Simple_Object()
     {
         // Arrange
-        PapercutContainer container = new PapercutBuilder()
+        PapercutContainer container = CreatePapercutBuilder()
             .Build();
         await container.StartAsync(TestContext.Current.CancellationToken).ConfigureAwait(true);
 
@@ -125,7 +125,7 @@ public class SendMailTests : IClassFixture<CustomWebApplicationFactory<Program>>
     public async Task Post_Send_Returns_Error_For_Missing_Required_Property()
     {
         // Arrange
-        PapercutContainer container = new PapercutBuilder()
+        PapercutContainer container = CreatePapercutBuilder()
             .Build();
         await container.StartAsync(TestContext.Current.CancellationToken).ConfigureAwait(true);
 
@@ -192,7 +192,7 @@ public class SendMailTests : IClassFixture<CustomWebApplicationFactory<Program>>
     public async Task Post_Send_Returns_Success_For_Good_Template_Id_Complex_Object()
     {
         // Arrange
-        PapercutContainer container = new PapercutBuilder()
+        PapercutContainer container = CreatePapercutBuilder()
             .Build();
         await container.StartAsync(TestContext.Current.CancellationToken).ConfigureAwait(true);
 
@@ -324,7 +324,7 @@ Neo</p>
     public async Task Post_Send_Returns_Success_For_Good_Template_Id_Complex_Object_With_Attachment()
     {
         // Arrange
-        PapercutContainer container = new PapercutBuilder()
+        PapercutContainer container = CreatePapercutBuilder()
             .Build();
         await container.StartAsync(TestContext.Current.CancellationToken).ConfigureAwait(true);
 
@@ -467,7 +467,7 @@ Neo</p>
     public async Task Post_Send_Returns_Success_For_Good_Template_Id_Complex_Object_With_Inline_Attachment()
     {
         // Arrange
-        PapercutContainer container = new PapercutBuilder()
+        PapercutContainer container = CreatePapercutBuilder()
             .Build();
         await container.StartAsync(TestContext.Current.CancellationToken).ConfigureAwait(true);
 
@@ -631,7 +631,7 @@ Neo</p>
     public async Task Post_Send_Returns_Success_For_Good_Template_With_Custom_Fluid_Tag()
     {
         // Arrange
-        PapercutContainer container = new PapercutBuilder()
+        PapercutContainer container = CreatePapercutBuilder()
             .Build();
         await container.StartAsync(TestContext.Current.CancellationToken).ConfigureAwait(true);
 
@@ -718,7 +718,7 @@ Neo</p>
     public async Task Post_Send_Returns_Success_For_Good_Template_With_Custom_Fluid_Tag_As_Attachment()
     {
         // Arrange
-        PapercutContainer container = new PapercutBuilder()
+        PapercutContainer container = CreatePapercutBuilder()
             .Build();
         await container.StartAsync(TestContext.Current.CancellationToken).ConfigureAwait(true);
 
@@ -807,7 +807,7 @@ Neo</p>
     public async Task Post_Send_Returns_Success_For_Good_Template_Id_Simple_Object_Signature()
     {
         // Arrange
-        PapercutContainer container = new PapercutBuilder()
+        PapercutContainer container = CreatePapercutBuilder()
             .Build();
         await container.StartAsync(TestContext.Current.CancellationToken).ConfigureAwait(true);
 
@@ -938,7 +938,7 @@ Phone +493023125666
     public async Task Post_Send_Returns_Success_For_Good_Template_Id_Simple_Object_Signature_No_Parameter()
     {
         // Arrange
-        PapercutContainer container = new PapercutBuilder()
+        PapercutContainer container = CreatePapercutBuilder()
             .Build();
         await container.StartAsync(TestContext.Current.CancellationToken).ConfigureAwait(true);
 
@@ -1062,7 +1062,7 @@ Dummy.
     public async Task Post_Send_Returns_Success_For_Good_Template_Id_Simple_Object_Signature_With_Inline_Image()
     {
         // Arrange
-        PapercutContainer container = new PapercutBuilder()
+        PapercutContainer container = new PapercutBuilder("docker.io/changemakerstudiosus/papercut-smtp:7.7")
             .Build();
         await container.StartAsync(TestContext.Current.CancellationToken).ConfigureAwait(true);
 
@@ -1187,6 +1187,8 @@ Dummy.
         Assert.NotNull(message.Bcc);
         Assert.Contains(message.Bcc, address => address.Address == "prince@example.org");
     }
+
+    private static PapercutBuilder CreatePapercutBuilder() => new("docker.io/changemakerstudiosus/papercut-smtp:7.7");
 
     private sealed record CouponItem(string Name);
 }
