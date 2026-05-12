@@ -2919,7 +2919,7 @@
           "Microsoft.EntityFrameworkCore": "[9.0.16, )",
           "Microsoft.EntityFrameworkCore.Design": "[9.0.16, )",
           "Microsoft.EntityFrameworkCore.InMemory": "[9.0.16, )",
-          "Microsoft.EntityFrameworkCore.Tools": "[9.0.16, )",
+          "Microsoft.EntityFrameworkCore.Tools": "[10.0.8, )",
           "Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore": "[9.0.16, )",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "[9.0.12, )",
           "Newtonsoft.Json": "[13.0.4, )",
@@ -3060,11 +3060,11 @@
       },
       "Microsoft.EntityFrameworkCore.Tools": {
         "type": "CentralTransitive",
-        "requested": "[9.0.16, )",
-        "resolved": "9.0.16",
-        "contentHash": "0KexctGl/S9H/9RFw1TdPSSry7AurZ4VSaE2T5I7xrJmqArNJJtjHxhmnupicJoQqf4GMsYF0HuiSf/GiIfxSw==",
+        "requested": "[10.0.8, )",
+        "resolved": "10.0.8",
+        "contentHash": "bKtoSviiOUX75jM5bzSnBGPUjb2CfbBHdUDsjYv2X3/G3ZMMG18VpJMMAcP0tD8Xepu+wLl2soNJiWH6XxXWdQ==",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Design": "9.0.16"
+          "Microsoft.EntityFrameworkCore.Design": "8.0.0"
         }
       },
       "Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore": {
