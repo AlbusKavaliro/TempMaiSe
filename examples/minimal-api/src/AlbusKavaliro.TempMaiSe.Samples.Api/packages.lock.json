@@ -1322,11 +1322,11 @@
       },
       "Microsoft.EntityFrameworkCore.Tools": {
         "type": "Direct",
-        "requested": "[9.0.16, )",
-        "resolved": "9.0.16",
-        "contentHash": "0KexctGl/S9H/9RFw1TdPSSry7AurZ4VSaE2T5I7xrJmqArNJJtjHxhmnupicJoQqf4GMsYF0HuiSf/GiIfxSw==",
+        "requested": "[10.0.8, )",
+        "resolved": "10.0.8",
+        "contentHash": "bKtoSviiOUX75jM5bzSnBGPUjb2CfbBHdUDsjYv2X3/G3ZMMG18VpJMMAcP0tD8Xepu+wLl2soNJiWH6XxXWdQ==",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Design": "9.0.16"
+          "Microsoft.EntityFrameworkCore.Design": "8.0.0"
         }
       },
       "Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore": {
