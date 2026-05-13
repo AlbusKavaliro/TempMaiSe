@@ -2052,8 +2052,11 @@
       },
       "Microsoft.Build.Framework": {
         "type": "Transitive",
-        "resolved": "18.4.0",
-        "contentHash": "oq6UxPfzz5S5hCC9hTRBt1r99BwEzCP/h/DadMl/m6RSGTUUXjoblsTTrokYks0SzZ2Cvx0fk4TvuEpxuXxPbw=="
+        "resolved": "18.6.3",
+        "contentHash": "jywLHZK1Skb+kVO9Q2Drz0h3p0MnUDsMudYcXNKq1vYXPiYDXHbWJZlMxhyt2dp0T3IYiTQPb+6FMnWRwt3Kiw==",
+        "dependencies": {
+          "Microsoft.NET.StringTools": "18.6.3"
+        }
       },
       "Microsoft.Build.Locator": {
         "type": "Transitive",
@@ -2062,10 +2065,10 @@
       },
       "Microsoft.Build.Utilities.Core": {
         "type": "Transitive",
-        "resolved": "18.4.0",
-        "contentHash": "k0nCnZRs4r/y0pJNLKYGXYyzToaBV2JM0XFidRyEuRUhtZGcIvWKnK7dzXA8MGs4ah4pzYh6/7EJLlmPyjHTnA==",
+        "resolved": "18.6.3",
+        "contentHash": "QY8fuN42Tlssib/YMyIECX3MoMAB49v3ZS7uTpf6tNs5BbzdXmo+o9HI1joUXJLwueQn9Lbwdpv+q44tzsqFdw==",
         "dependencies": {
-          "Microsoft.Build.Framework": "18.4.0"
+          "Microsoft.Build.Framework": "18.6.3"
         }
       },
       "Microsoft.CodeAnalysis.Analyzers": {
@@ -2342,8 +2345,8 @@
       },
       "Microsoft.NET.StringTools": {
         "type": "Transitive",
-        "resolved": "18.4.0",
-        "contentHash": "iQWOKi3L5QStmWqDjDubcr1KlTDy88qBTe88I0etlUUo1l0zSNebGJXl1Xetyl+ACA+ujP3YUtxo3Nz54JPriw=="
+        "resolved": "18.6.3",
+        "contentHash": "meWX/k62HeaQ+7zxcJBcGo2EccmLZiaHYwJJ9wAO6ZX3Ujeht5XNetVZWU7nW2vKbDB+88X1lQkLafVkOUrtgQ=="
       },
       "Microsoft.Testing.Extensions.Telemetry": {
         "type": "Transitive",
@@ -3014,12 +3017,12 @@
       },
       "Microsoft.Build.Tasks.Core": {
         "type": "CentralTransitive",
-        "requested": "[18.4.0, )",
-        "resolved": "18.4.0",
-        "contentHash": "+V0ohf0eBQQbWqN0sUBpaGglIduK2ZvPZVSyu/MOpCSGHtlaapxnzCNwj8AqwwYHBP/Sb63l4p0xUJxQJ6eJzg==",
+        "requested": "[18.6.3, )",
+        "resolved": "18.6.3",
+        "contentHash": "Ngp8CUmiSmB63MUzTIrWlVnvyyiRNrEIRv8tU5l3dSesqSuOb/l1nOP9HX1NLAMc4wh5OihGfgcnhTtL0jV08A==",
         "dependencies": {
-          "Microsoft.Build.Framework": "18.4.0",
-          "Microsoft.Build.Utilities.Core": "18.4.0"
+          "Microsoft.Build.Framework": "18.6.3",
+          "Microsoft.Build.Utilities.Core": "18.6.3"
         }
       },
       "Microsoft.EntityFrameworkCore": {
