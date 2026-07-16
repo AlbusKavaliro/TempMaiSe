@@ -645,10 +645,10 @@
       },
       "Microsoft.Build.Framework": {
         "type": "Transitive",
-        "resolved": "18.7.1",
-        "contentHash": "OkLtppCHnD0hrfeTQDZNSe6oxYW2/1qKmtE/iyF8ZzsdC541Txv0pUGrDZQTNr0E/OYxzpt5oVHqR26A6mzYnw==",
+        "resolved": "18.8.2",
+        "contentHash": "0rH2AaR+TyRhISTU3DEW1pskvOCrBa3QlHnItRqtBTExfCi14CxYNL3/COXxCfd+H40h2WB3XOYSYUlF5IFIwA==",
         "dependencies": {
-          "Microsoft.NET.StringTools": "18.7.1"
+          "Microsoft.NET.StringTools": "18.8.2"
         }
       },
       "Microsoft.CodeAnalysis.Analyzers": {
@@ -817,8 +817,8 @@
       },
       "Microsoft.NET.StringTools": {
         "type": "Transitive",
-        "resolved": "18.7.1",
-        "contentHash": "OhuO9c4ZqYBaqB7INwOpDLa7wX0VkR2T3MhjUSsPebLvZi0/Z7QzeeD5uiINd9L9Wev+EwvNUiF3N2hWVtdFPQ=="
+        "resolved": "18.8.2",
+        "contentHash": "TWyg687GoiC9dhj85CagUfYFKYtxRX2jv5raO+zolLVmvKIS1k5WXYh8IMvyiPP5f9r9/snpmTZioyCO5zh+ww=="
       },
       "Microsoft.VisualStudio.SolutionPersistence": {
         "type": "Transitive",
@@ -1185,11 +1185,11 @@
       },
       "Microsoft.Build": {
         "type": "CentralTransitive",
-        "requested": "[18.7.1, )",
-        "resolved": "18.7.1",
-        "contentHash": "BWFGVuZs9M6eSef12215dFwQUxoXAUW7VluUd2LLqa7nY09U9AzO/6Ms0RziPGmZ9Wa+MrXayOgsX6YjJkPWiw==",
+        "requested": "[18.8.2, )",
+        "resolved": "18.8.2",
+        "contentHash": "o30Qy4z+5KbJgHo+nmOt4sqrnIvb3BQlpEtE+Izlfk9eQKvppwHZGfQ1JUmFfkdcVpqZkgbqCPnqIkI/98dcIA==",
         "dependencies": {
-          "Microsoft.Build.Framework": "18.7.1",
+          "Microsoft.Build.Framework": "18.8.2",
           "System.Configuration.ConfigurationManager": "10.0.4",
           "System.Reflection.MetadataLoadContext": "10.0.4",
           "System.Security.Cryptography.ProtectedData": "10.0.4"
