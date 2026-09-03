@@ -1,13 +1,10 @@
-using Fluid;
-using Newtonsoft.Json.Schema;
-using FluentEmail.Core;
-using FluentEmail.Core.Models;
-
 using System.Diagnostics;
 using System.Text.Encodings.Web;
-
 using AlbusKavaliro.TempMaiSe.Models;
-
+using FluentEmail.Core;
+using FluentEmail.Core.Models;
+using Fluid;
+using Newtonsoft.Json.Schema;
 using OneOf;
 using OneOf.Types;
 
@@ -18,6 +15,10 @@ namespace AlbusKavaliro.TempMaiSe.Mailer;
 /// </summary>
 public class MailService : IMailService
 {
+    private const string TraceParentHeaderName = "traceparent";
+
+    private const string TraceStateHeaderName = "tracestate";
+
     private readonly IFluentEmailFactory _mailFactory;
 
     private readonly ITemplateRepository _templateRepository;
@@ -73,6 +74,7 @@ public class MailService : IMailService
         InlineAttachmentCollection inlineAttachments = MergeInlineAttachments(templateData, mailInformation);
 
         IFluentEmail mail = _mailFactory.Create();
+        InjectTraceHeaders(mail);
         mail = _mailHeaderMapper.Map(templateData, mail);
         mail = _mailInfoMapper.Map(mailInformation, mail);
 
@@ -94,6 +96,22 @@ public class MailService : IMailService
         SendResponse resp = await mail.SendAsync(cancellationToken).ConfigureAwait(false);
         MailingInstrumentation.Instance?.MailsSent.Add(1);
         return resp;
+    }
+
+    private static void InjectTraceHeaders(IFluentEmail mail)
+    {
+        Activity? activity = Activity.Current;
+        if (activity?.Id is null || activity.IdFormat is not ActivityIdFormat.W3C)
+        {
+            return;
+        }
+
+        mail.Header(TraceParentHeaderName, activity.Id);
+
+        if (activity.TraceStateString is string traceState)
+        {
+            mail.Header(TraceStateHeaderName, traceState);
+        }
     }
 
     private static InlineAttachmentCollection MergeInlineAttachments(TemplateData templateData, MailInformation mailInformation)
