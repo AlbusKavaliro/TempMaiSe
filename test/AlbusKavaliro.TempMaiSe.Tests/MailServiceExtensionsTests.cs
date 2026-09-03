@@ -1,5 +1,6 @@
 using Fluid;
 using AlbusKavaliro.TempMaiSe.Mailer;
+using Microsoft.Extensions.Configuration;
 using Microsoft.FeatureManagement;
 
 namespace AlbusKavaliro.TempMaiSe.Tests;
@@ -83,6 +84,7 @@ public class MailServiceExtensionsTests
     {
         // Arrange
         IServiceCollection services = new ServiceCollection();
+        services.AddSingleton<IConfiguration>(new ConfigurationBuilder().Build());
 
         // Act
         MailServiceExtensions.AddMailService(services);
