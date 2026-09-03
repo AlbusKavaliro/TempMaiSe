@@ -1,4 +1,8 @@
 using Fluid;
+using FluentEmail.Core;
+using AlbusKavaliro.TempMaiSe.Models;
+using Microsoft.FeatureManagement;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using AlbusKavaliro.TempMaiSe.Mailer;
 
@@ -23,6 +27,11 @@ public static class MailServiceExtensions
     {
         ArgumentNullException.ThrowIfNull(services);
 
+        if (services.Any(s => s.ServiceType == typeof(IConfiguration)))
+        {
+            _ = services.AddFeatureManagement();
+        }
+
         services.TryAddSingleton(serviceProvider =>
         {
             options ??= new();
@@ -38,6 +47,19 @@ public static class MailServiceExtensions
 
         services.TryAddSingleton<IDataParser, DataParser>();
 
-        services.TryAddScoped<IMailService, MailService>();
+        services.TryAddScoped<IMailService>(serviceProvider =>
+        {
+            FluidParser fluidParser = serviceProvider.GetRequiredService<FluidParser>();
+            return new MailService(
+                serviceProvider.GetRequiredService<IFluentEmailFactory>(),
+                serviceProvider.GetRequiredService<ITemplateRepository>(),
+                serviceProvider.GetRequiredService<IDataParser>(),
+                fluidParser,
+                serviceProvider.GetRequiredService<ITemplateToMailMapper>(),
+                serviceProvider.GetRequiredService<IMailInformationToMailMapper>(),
+                serviceProvider,
+                serviceProvider.GetService<IFeatureManager>(),
+                serviceProvider.GetService<IConfiguration>());
+        });
     }
 }

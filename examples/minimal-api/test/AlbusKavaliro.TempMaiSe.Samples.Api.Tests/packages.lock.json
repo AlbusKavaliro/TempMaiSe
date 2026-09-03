@@ -1266,8 +1266,9 @@
       "albuskavaliro.tempmaise.mailer": {
         "type": "Project",
         "dependencies": {
-          "AlbusKavaliro.TempMaiSe.Models": "[3.1.3, )",
+          "AlbusKavaliro.TempMaiSe.Models": "[3.1.4, )",
           "Fluid.Core": "[2.40.0, )",
+          "Microsoft.FeatureManagement": "[4.7.0, )",
           "Newtonsoft.Json": "[13.0.4, )",
           "Newtonsoft.Json.Schema": "[4.0.1, )",
           "OneOf": "[3.0.271, )",
@@ -1280,7 +1281,7 @@
       "albuskavaliro.tempmaise.samples.api": {
         "type": "Project",
         "dependencies": {
-          "AlbusKavaliro.TempMaiSe.Mailer": "[3.1.3, )",
+          "AlbusKavaliro.TempMaiSe.Mailer": "[3.1.4, )",
           "Fluid.Core": "[2.40.0, )",
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "[10.0.11, )",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "[10.0.11, )",
@@ -1428,6 +1429,12 @@
         "dependencies": {
           "Microsoft.EntityFrameworkCore.Relational": "10.0.11"
         }
+      },
+      "Microsoft.FeatureManagement": {
+        "type": "CentralTransitive",
+        "requested": "[4.7.0, )",
+        "resolved": "4.7.0",
+        "contentHash": "f+XutOuZZLNq6OJV8z7nys+k89W3PUsoJJgrbYTXd20GvDyJfQ9A8o2MSU8FZT7DY6jQOq3I4KO/+NHsXHdACw=="
       },
       "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
         "type": "CentralTransitive",

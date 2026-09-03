@@ -101,6 +101,9 @@ builder.Services.AddFluentEmail(config);
 
 // Register the default IMailService implementation
 builder.Services.AddMailService();
+
+// Optional: disable W3C traceparent/tracestate mail header injection
+// appsettings.json -> "FeatureManagement": { "TempMaiSe.InjectTraceHeaders": false }
 ```
 
 ### Example REST-API
