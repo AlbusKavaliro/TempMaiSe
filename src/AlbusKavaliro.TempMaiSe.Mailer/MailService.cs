@@ -35,9 +35,9 @@ public class MailService : IMailService
 
     private readonly IServiceProvider _serviceProvider;
 
-    private readonly IFeatureManager _featureManager;
+    private readonly IFeatureManager? _featureManager;
 
-    private readonly IConfiguration _configuration;
+    private readonly IConfiguration? _configuration;
 
     public MailService(
         IFluentEmailFactory mailFactory,
@@ -47,8 +47,8 @@ public class MailService : IMailService
         ITemplateToMailMapper mailHeaderMapper,
         IMailInformationToMailMapper mailInfoMapper,
         IServiceProvider serviceProvider,
-        IFeatureManager featureManager,
-        IConfiguration configuration)
+        IFeatureManager? featureManager = null,
+        IConfiguration? configuration = null)
     {
         _mailFactory = mailFactory ?? throw new ArgumentNullException(nameof(mailFactory));
         _templateRepository = templateRepository ?? throw new ArgumentNullException(nameof(templateRepository));
@@ -57,8 +57,8 @@ public class MailService : IMailService
         _mailHeaderMapper = mailHeaderMapper ?? throw new ArgumentNullException(nameof(mailHeaderMapper));
         _mailInfoMapper = mailInfoMapper ?? throw new ArgumentNullException(nameof(mailInfoMapper));
         _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
-        _featureManager = featureManager ?? throw new ArgumentNullException(nameof(featureManager));
-        _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+        _featureManager = featureManager;
+        _configuration = configuration;
     }
 
     /// <inheritdoc/>
@@ -110,7 +110,7 @@ public class MailService : IMailService
 
     private async Task InjectTraceHeadersAsync(IFluentEmail mail)
     {
-        bool injectTraceHeaders = !IsTraceHeaderInjectionConfigured() || await _featureManager.IsEnabledAsync(MailFeatureFlags.InjectTraceHeaders).ConfigureAwait(false);
+        bool injectTraceHeaders = !IsTraceHeaderInjectionConfigured() || (_featureManager is not null && await _featureManager.IsEnabledAsync(MailFeatureFlags.InjectTraceHeaders).ConfigureAwait(false));
         if (!injectTraceHeaders)
         {
             return;
@@ -131,7 +131,7 @@ public class MailService : IMailService
     }
 
     private bool IsTraceHeaderInjectionConfigured() =>
-        _configuration[$"FeatureManagement:{MailFeatureFlags.InjectTraceHeaders}"] is not null;
+        _configuration?[$"FeatureManagement:{MailFeatureFlags.InjectTraceHeaders}"] is not null;
 
     private static InlineAttachmentCollection MergeInlineAttachments(TemplateData templateData, MailInformation mailInformation)
     {

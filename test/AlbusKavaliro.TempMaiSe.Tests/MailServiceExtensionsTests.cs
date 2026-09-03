@@ -32,6 +32,20 @@ public class MailServiceExtensionsTests
     }
 
     [Fact]
+    public void AddMailService_Does_Not_Require_IConfiguration_To_Build_ServiceProvider()
+    {
+        // Arrange
+        IServiceCollection services = new ServiceCollection();
+
+        // Act
+        MailServiceExtensions.AddMailService(services);
+
+        // Assert
+        using ServiceProvider serviceProvider = services.BuildServiceProvider();
+        _ = serviceProvider.GetRequiredService<FluidMailParser>();
+    }
+
+    [Fact]
     public void AddMailService_Calls_Given_Action_To_Configure_Parser()
     {
         // Arrange

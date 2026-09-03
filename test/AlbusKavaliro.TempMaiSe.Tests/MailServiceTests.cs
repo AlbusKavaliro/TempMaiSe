@@ -156,6 +156,24 @@ public class MailServiceTests
         mail.Verify(m => m.Header("tracestate", "vendor=value"), Times.Once);
     }
 
+    [Fact]
+    public async Task SendMailAsync_Without_FeatureManager_And_Configuration_Defaults_To_Injecting_Trace_Headers()
+    {
+        // Arrange
+        Mock<IFluentEmail> mail = CreateMailMock();
+        MailService mailService = CreateMailService(mail);
+
+        using Activity activity = new("send-mail");
+        activity.SetIdFormat(ActivityIdFormat.W3C);
+        activity.Start();
+
+        // Act
+        _ = await mailService.SendMailAsync(1, new MemoryStream(), TestContext.Current.CancellationToken).ConfigureAwait(true);
+
+        // Assert
+        mail.Verify(m => m.Header("traceparent", activity.Id!), Times.Once);
+    }
+
     private static IConfiguration CreateFeatureConfiguration(bool enabled)
     {
         return new ConfigurationBuilder()
@@ -213,5 +231,46 @@ public class MailServiceTests
             serviceProvider.Object,
             featureManager.Object,
             configuration);
+    }
+
+    private static MailService CreateMailService(Mock<IFluentEmail> mail)
+    {
+        Mock<IFluentEmailFactory> mailFactory = new();
+        mailFactory.Setup(m => m.Create()).Returns(mail.Object);
+
+        Mock<ITemplateRepository> templateRepository = new();
+        templateRepository
+            .Setup(m => m.GetTemplateAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new Template
+            {
+                Id = 1,
+                Data = new TemplateData
+                {
+                    SubjectTemplate = "Hello",
+                    JsonSchema = "{}"
+                }
+            });
+
+        Mock<IDataParser> dataParser = new();
+        dataParser
+            .Setup(m => m.ParseAsync(It.IsAny<string>(), It.IsAny<Stream>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new MailInformation { Data = new { Name = "Tester" } });
+
+        Mock<ITemplateToMailMapper> mailHeaderMapper = new();
+        mailHeaderMapper.Setup(m => m.Map(It.IsAny<TemplateData>(), It.IsAny<IFluentEmail>())).Returns(mail.Object);
+
+        Mock<IMailInformationToMailMapper> mailInfoMapper = new();
+        mailInfoMapper.Setup(m => m.Map(It.IsAny<MailInformation>(), It.IsAny<IFluentEmail>())).Returns(mail.Object);
+
+        Mock<IServiceProvider> serviceProvider = new();
+
+        return new MailService(
+            mailFactory.Object,
+            templateRepository.Object,
+            dataParser.Object,
+            new FluidParser(),
+            mailHeaderMapper.Object,
+            mailInfoMapper.Object,
+            serviceProvider.Object);
     }
 }
