@@ -1,4 +1,5 @@
 using Fluid;
+using Microsoft.FeatureManagement;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using AlbusKavaliro.TempMaiSe.Mailer;
 
@@ -22,6 +23,8 @@ public static class MailServiceExtensions
     public static void AddMailService(this IServiceCollection services, Action<IServiceProvider, FluidMailParser>? configureParser = null, FluidParserOptions? options = null)
     {
         ArgumentNullException.ThrowIfNull(services);
+
+        _ = services.AddFeatureManagement();
 
         services.TryAddSingleton(serviceProvider =>
         {

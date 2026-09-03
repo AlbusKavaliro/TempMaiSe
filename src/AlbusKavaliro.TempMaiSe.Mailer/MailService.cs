@@ -4,6 +4,8 @@ using AlbusKavaliro.TempMaiSe.Models;
 using FluentEmail.Core;
 using FluentEmail.Core.Models;
 using Fluid;
+using Microsoft.Extensions.Configuration;
+using Microsoft.FeatureManagement;
 using Newtonsoft.Json.Schema;
 using OneOf;
 using OneOf.Types;
@@ -33,6 +35,10 @@ public class MailService : IMailService
 
     private readonly IServiceProvider _serviceProvider;
 
+    private readonly IFeatureManager _featureManager;
+
+    private readonly IConfiguration _configuration;
+
     public MailService(
         IFluentEmailFactory mailFactory,
         ITemplateRepository templateRepository,
@@ -40,7 +46,9 @@ public class MailService : IMailService
         FluidParser fluidParser,
         ITemplateToMailMapper mailHeaderMapper,
         IMailInformationToMailMapper mailInfoMapper,
-        IServiceProvider serviceProvider)
+        IServiceProvider serviceProvider,
+        IFeatureManager featureManager,
+        IConfiguration configuration)
     {
         _mailFactory = mailFactory ?? throw new ArgumentNullException(nameof(mailFactory));
         _templateRepository = templateRepository ?? throw new ArgumentNullException(nameof(templateRepository));
@@ -49,6 +57,8 @@ public class MailService : IMailService
         _mailHeaderMapper = mailHeaderMapper ?? throw new ArgumentNullException(nameof(mailHeaderMapper));
         _mailInfoMapper = mailInfoMapper ?? throw new ArgumentNullException(nameof(mailInfoMapper));
         _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
+        _featureManager = featureManager ?? throw new ArgumentNullException(nameof(featureManager));
+        _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
     }
 
     /// <inheritdoc/>
@@ -74,7 +84,7 @@ public class MailService : IMailService
         InlineAttachmentCollection inlineAttachments = MergeInlineAttachments(templateData, mailInformation);
 
         IFluentEmail mail = _mailFactory.Create();
-        InjectTraceHeaders(mail);
+        await InjectTraceHeadersAsync(mail).ConfigureAwait(false);
         mail = _mailHeaderMapper.Map(templateData, mail);
         mail = _mailInfoMapper.Map(mailInformation, mail);
 
@@ -98,8 +108,14 @@ public class MailService : IMailService
         return resp;
     }
 
-    private static void InjectTraceHeaders(IFluentEmail mail)
+    private async Task InjectTraceHeadersAsync(IFluentEmail mail)
     {
+        bool injectTraceHeaders = !IsTraceHeaderInjectionConfigured() || await _featureManager.IsEnabledAsync(MailFeatureFlags.InjectTraceHeaders).ConfigureAwait(false);
+        if (!injectTraceHeaders)
+        {
+            return;
+        }
+
         Activity? activity = Activity.Current;
         if (activity?.Id is null || activity.IdFormat is not ActivityIdFormat.W3C)
         {
@@ -113,6 +129,9 @@ public class MailService : IMailService
             mail.Header(TraceStateHeaderName, traceState);
         }
     }
+
+    private bool IsTraceHeaderInjectionConfigured() =>
+        _configuration[$"FeatureManagement:{MailFeatureFlags.InjectTraceHeaders}"] is not null;
 
     private static InlineAttachmentCollection MergeInlineAttachments(TemplateData templateData, MailInformation mailInformation)
     {
