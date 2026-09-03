@@ -17,6 +17,8 @@ namespace AlbusKavaliro.TempMaiSe.Tests;
 [Trait("Category", "Unit")]
 public class MailServiceTests
 {
+    private const string TraceHeadersFeatureName = "TempMaiSe.InjectTraceHeaders";
+
     [Fact]
     public async Task SendMailAsync_TemplateNotFound_ReturnsNotFound()
     {
@@ -62,17 +64,12 @@ public class MailServiceTests
     public async Task SendMailAsync_Injects_Traceparent_Header_When_Feature_Is_Enabled()
     {
         // Arrange
-        Mock<IFluentEmail> mail = new();
-        mail.Setup(m => m.Header(It.IsAny<string>(), It.IsAny<string>())).Returns(mail.Object);
-        mail.Setup(m => m.Subject(It.IsAny<string>())).Returns(mail.Object);
-        mail.Setup(m => m.SendAsync(It.IsAny<CancellationToken>())).ReturnsAsync(new SendResponse());
+        Mock<IFluentEmail> mail = CreateMailMock();
 
         Mock<IFeatureManager> featureManager = new();
-        featureManager.Setup(m => m.IsEnabledAsync("TempMaiSe.InjectTraceHeaders")).ReturnsAsync(true);
+        featureManager.Setup(m => m.IsEnabledAsync(TraceHeadersFeatureName)).ReturnsAsync(true);
 
-        IConfiguration configuration = new ConfigurationBuilder()
-            .AddInMemoryCollection(new Dictionary<string, string?> { ["FeatureManagement:TempMaiSe.InjectTraceHeaders"] = "true" })
-            .Build();
+        IConfiguration configuration = CreateFeatureConfiguration(true);
 
         MailService mailService = CreateMailService(mail, featureManager, configuration);
 
@@ -85,23 +82,19 @@ public class MailServiceTests
 
         // Assert
         mail.Verify(m => m.Header("traceparent", activity.Id!), Times.Once);
+        featureManager.Verify(m => m.IsEnabledAsync(TraceHeadersFeatureName), Times.Once);
     }
 
     [Fact]
     public async Task SendMailAsync_Does_Not_Inject_Traceparent_Header_When_Feature_Is_Disabled()
     {
         // Arrange
-        Mock<IFluentEmail> mail = new();
-        mail.Setup(m => m.Header(It.IsAny<string>(), It.IsAny<string>())).Returns(mail.Object);
-        mail.Setup(m => m.Subject(It.IsAny<string>())).Returns(mail.Object);
-        mail.Setup(m => m.SendAsync(It.IsAny<CancellationToken>())).ReturnsAsync(new SendResponse());
+        Mock<IFluentEmail> mail = CreateMailMock();
 
         Mock<IFeatureManager> featureManager = new();
-        featureManager.Setup(m => m.IsEnabledAsync("TempMaiSe.InjectTraceHeaders")).ReturnsAsync(false);
+        featureManager.Setup(m => m.IsEnabledAsync(TraceHeadersFeatureName)).ReturnsAsync(false);
 
-        IConfiguration configuration = new ConfigurationBuilder()
-            .AddInMemoryCollection(new Dictionary<string, string?> { ["FeatureManagement:TempMaiSe.InjectTraceHeaders"] = "false" })
-            .Build();
+        IConfiguration configuration = CreateFeatureConfiguration(false);
 
         MailService mailService = CreateMailService(mail, featureManager, configuration);
 
@@ -114,6 +107,69 @@ public class MailServiceTests
 
         // Assert
         mail.Verify(m => m.Header("traceparent", It.IsAny<string>()), Times.Never);
+        featureManager.Verify(m => m.IsEnabledAsync(TraceHeadersFeatureName), Times.Once);
+    }
+
+    [Fact]
+    public async Task SendMailAsync_Injects_Traceparent_Header_When_Feature_Is_Not_Configured()
+    {
+        // Arrange
+        Mock<IFluentEmail> mail = CreateMailMock();
+        Mock<IFeatureManager> featureManager = new(MockBehavior.Strict);
+        IConfiguration configuration = new ConfigurationBuilder().Build();
+        MailService mailService = CreateMailService(mail, featureManager, configuration);
+
+        using Activity activity = new("send-mail");
+        activity.SetIdFormat(ActivityIdFormat.W3C);
+        activity.Start();
+
+        // Act
+        _ = await mailService.SendMailAsync(1, new MemoryStream(), TestContext.Current.CancellationToken).ConfigureAwait(true);
+
+        // Assert
+        mail.Verify(m => m.Header("traceparent", activity.Id!), Times.Once);
+        featureManager.Verify(m => m.IsEnabledAsync(It.IsAny<string>()), Times.Never);
+    }
+
+    [Fact]
+    public async Task SendMailAsync_Injects_Tracestate_Header_When_Activity_Has_TraceState_And_Feature_Is_Enabled()
+    {
+        // Arrange
+        Mock<IFluentEmail> mail = CreateMailMock();
+
+        Mock<IFeatureManager> featureManager = new();
+        featureManager.Setup(m => m.IsEnabledAsync(TraceHeadersFeatureName)).ReturnsAsync(true);
+
+        IConfiguration configuration = CreateFeatureConfiguration(true);
+        MailService mailService = CreateMailService(mail, featureManager, configuration);
+
+        using Activity activity = new("send-mail");
+        activity.SetIdFormat(ActivityIdFormat.W3C);
+        activity.Start();
+        activity.TraceStateString = "vendor=value";
+
+        // Act
+        _ = await mailService.SendMailAsync(1, new MemoryStream(), TestContext.Current.CancellationToken).ConfigureAwait(true);
+
+        // Assert
+        mail.Verify(m => m.Header("traceparent", activity.Id!), Times.Once);
+        mail.Verify(m => m.Header("tracestate", "vendor=value"), Times.Once);
+    }
+
+    private static IConfiguration CreateFeatureConfiguration(bool enabled)
+    {
+        return new ConfigurationBuilder()
+            .AddInMemoryCollection(new Dictionary<string, string?> { [$"FeatureManagement:{TraceHeadersFeatureName}"] = enabled ? "true" : "false" })
+            .Build();
+    }
+
+    private static Mock<IFluentEmail> CreateMailMock()
+    {
+        Mock<IFluentEmail> mail = new();
+        mail.Setup(m => m.Header(It.IsAny<string>(), It.IsAny<string>())).Returns(mail.Object);
+        mail.Setup(m => m.Subject(It.IsAny<string>())).Returns(mail.Object);
+        mail.Setup(m => m.SendAsync(It.IsAny<CancellationToken>())).ReturnsAsync(new SendResponse());
+        return mail;
     }
 
     private static MailService CreateMailService(Mock<IFluentEmail> mail, Mock<IFeatureManager> featureManager, IConfiguration configuration)
