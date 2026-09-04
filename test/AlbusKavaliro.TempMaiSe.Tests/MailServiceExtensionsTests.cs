@@ -1,5 +1,7 @@
 using Fluid;
 using AlbusKavaliro.TempMaiSe.Mailer;
+using Microsoft.Extensions.Configuration;
+using Microsoft.FeatureManagement;
 
 namespace AlbusKavaliro.TempMaiSe.Tests;
 
@@ -27,6 +29,20 @@ public class MailServiceExtensionsTests
         // Assert
         Assert.Single(services, sr => sr.ServiceType.Equals(typeof(FluidMailParser)));
         Assert.Single(services, sr => sr.ServiceType.Equals(typeof(FluidParser)));
+    }
+
+    [Fact]
+    public void AddMailService_Does_Not_Require_IConfiguration_To_Build_ServiceProvider()
+    {
+        // Arrange
+        IServiceCollection services = new ServiceCollection();
+
+        // Act
+        MailServiceExtensions.AddMailService(services);
+
+        // Assert
+        using ServiceProvider serviceProvider = services.BuildServiceProvider();
+        _ = serviceProvider.GetRequiredService<FluidMailParser>();
     }
 
     [Fact]
@@ -74,5 +90,21 @@ public class MailServiceExtensionsTests
 
         // Assert
         Assert.True(called);
+    }
+
+
+    [Fact]
+    public void AddMailService_Registers_FeatureManagement()
+    {
+        // Arrange
+        IServiceCollection services = new ServiceCollection();
+        services.AddSingleton<IConfiguration>(new ConfigurationBuilder().Build());
+
+        // Act
+        MailServiceExtensions.AddMailService(services);
+
+        // Assert
+        using ServiceProvider serviceProvider = services.BuildServiceProvider();
+        _ = serviceProvider.GetRequiredService<IFeatureManager>();
     }
 }

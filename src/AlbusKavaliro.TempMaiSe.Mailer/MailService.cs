@@ -1,13 +1,12 @@
-using Fluid;
-using Newtonsoft.Json.Schema;
-using FluentEmail.Core;
-using FluentEmail.Core.Models;
-
 using System.Diagnostics;
 using System.Text.Encodings.Web;
-
 using AlbusKavaliro.TempMaiSe.Models;
-
+using FluentEmail.Core;
+using FluentEmail.Core.Models;
+using Fluid;
+using Microsoft.Extensions.Configuration;
+using Microsoft.FeatureManagement;
+using Newtonsoft.Json.Schema;
 using OneOf;
 using OneOf.Types;
 
@@ -18,6 +17,10 @@ namespace AlbusKavaliro.TempMaiSe.Mailer;
 /// </summary>
 public class MailService : IMailService
 {
+    private const string TraceParentHeaderName = "traceparent";
+
+    private const string TraceStateHeaderName = "tracestate";
+
     private readonly IFluentEmailFactory _mailFactory;
 
     private readonly ITemplateRepository _templateRepository;
@@ -32,6 +35,10 @@ public class MailService : IMailService
 
     private readonly IServiceProvider _serviceProvider;
 
+    private readonly IFeatureManager? _featureManager;
+
+    private readonly IConfiguration? _configuration;
+
     public MailService(
         IFluentEmailFactory mailFactory,
         ITemplateRepository templateRepository,
@@ -39,7 +46,9 @@ public class MailService : IMailService
         FluidParser fluidParser,
         ITemplateToMailMapper mailHeaderMapper,
         IMailInformationToMailMapper mailInfoMapper,
-        IServiceProvider serviceProvider)
+        IServiceProvider serviceProvider,
+        IFeatureManager? featureManager = null,
+        IConfiguration? configuration = null)
     {
         _mailFactory = mailFactory ?? throw new ArgumentNullException(nameof(mailFactory));
         _templateRepository = templateRepository ?? throw new ArgumentNullException(nameof(templateRepository));
@@ -48,6 +57,8 @@ public class MailService : IMailService
         _mailHeaderMapper = mailHeaderMapper ?? throw new ArgumentNullException(nameof(mailHeaderMapper));
         _mailInfoMapper = mailInfoMapper ?? throw new ArgumentNullException(nameof(mailInfoMapper));
         _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
+        _featureManager = featureManager;
+        _configuration = configuration;
     }
 
     /// <inheritdoc/>
@@ -73,6 +84,7 @@ public class MailService : IMailService
         InlineAttachmentCollection inlineAttachments = MergeInlineAttachments(templateData, mailInformation);
 
         IFluentEmail mail = _mailFactory.Create();
+        await InjectTraceHeadersAsync(mail).ConfigureAwait(false);
         mail = _mailHeaderMapper.Map(templateData, mail);
         mail = _mailInfoMapper.Map(mailInformation, mail);
 
@@ -95,6 +107,31 @@ public class MailService : IMailService
         MailingInstrumentation.Instance?.MailsSent.Add(1);
         return resp;
     }
+
+    private async Task InjectTraceHeadersAsync(IFluentEmail mail)
+    {
+        bool injectTraceHeaders = !IsTraceHeaderInjectionConfigured() || (_featureManager is not null && await _featureManager.IsEnabledAsync(MailFeatureFlags.InjectTraceHeaders).ConfigureAwait(false));
+        if (!injectTraceHeaders)
+        {
+            return;
+        }
+
+        Activity? activity = Activity.Current;
+        if (activity?.Id is null || activity.IdFormat is not ActivityIdFormat.W3C)
+        {
+            return;
+        }
+
+        mail.Header(TraceParentHeaderName, activity.Id);
+
+        if (activity.TraceStateString is string traceState)
+        {
+            mail.Header(TraceStateHeaderName, traceState);
+        }
+    }
+
+    private bool IsTraceHeaderInjectionConfigured() =>
+        _configuration?[$"FeatureManagement:{MailFeatureFlags.InjectTraceHeaders}"] is not null;
 
     private static InlineAttachmentCollection MergeInlineAttachments(TemplateData templateData, MailInformation mailInformation)
     {

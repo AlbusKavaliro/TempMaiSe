@@ -115,4 +115,3 @@ app.MapPost("/send/{id}", async (int id, Stream data, IMailService mailService, 
 
 app.Run();
 
-public partial class Program { }

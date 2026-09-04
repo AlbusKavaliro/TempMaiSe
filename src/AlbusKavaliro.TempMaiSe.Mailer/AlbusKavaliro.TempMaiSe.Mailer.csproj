@@ -1,4 +1,3 @@
-﻿
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
@@ -12,6 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="Fluid.Core" />
+    <PackageReference Include="Microsoft.FeatureManagement" />
   </ItemGroup>
 
   <ItemGroup>
