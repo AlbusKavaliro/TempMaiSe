@@ -51,11 +51,11 @@
       },
       "Testcontainers.Papercut": {
         "type": "Direct",
-        "requested": "[4.14.0, )",
-        "resolved": "4.14.0",
-        "contentHash": "sxELJMEtUULCur7wpgs6XCDeH8Z/SgoPP9x7UGrJvC8g90tRncG96MwW47IVaQJcm8l6QDwkELRoOlpLecOifQ==",
+        "requested": "[4.15.0, )",
+        "resolved": "4.15.0",
+        "contentHash": "JwWdwMKSCd+4Y8p329vVrE0Hs6g1LZX/1a4pymZh4HT1VyF7tkQ+YEaTGOvA5iTOudQaHyTINCQQZUs7GpxS7Q==",
         "dependencies": {
-          "Testcontainers": "4.14.0"
+          "Testcontainers": "4.15.0"
         }
       },
       "xunit.runner.visualstudio": {
@@ -1191,8 +1191,8 @@
       },
       "Testcontainers": {
         "type": "Transitive",
-        "resolved": "4.14.0",
-        "contentHash": "ojuBi91xcMsR6vnFuNsQDWU9tlZlrtmqy95VPNWVVnh24GiwFL/WMnVmb6bRv8LqovtnKPJN9cpmH1k02Z4ZoA==",
+        "resolved": "4.15.0",
+        "contentHash": "8tCZKMm++C/9dHIr8lsE1iDBIBmthbo2XlGFDr4gorT1vgZrJwU36fNkCGuX7h7V39rpQoTK/aG+FhJz3jhY3A==",
         "dependencies": {
           "Docker.DotNet.Enhanced": "4.3.3",
           "Docker.DotNet.Enhanced.X509": "4.3.3",
