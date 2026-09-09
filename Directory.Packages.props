@@ -10,9 +10,6 @@
     <PackageVersion Include="jcamp.FluentEmail.MailKit" Version="4.0.0" />
     <PackageVersion Include="jcamp.FluentEmail.Smtp" Version="4.0.0" />
     <PackageVersion Include="MailKit" Version="4.17.0" />
-    <!-- Bumped to satisfy Microsoft.VisualStudio.Web.CodeGeneration.Design dependency (>= 17.11.4) -->
-    <PackageVersion Include="Microsoft.Build" Version="18.9.6" />
-    <PackageVersion Include="Microsoft.Build.Tasks.Core" Version="18.9.6" />
     <PackageVersion Include="MimeKit" Version="4.17.0" />
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageVersion Include="Newtonsoft.Json.Schema" Version="4.0.1" />
@@ -32,7 +29,7 @@
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="11.0.0-rc.1.26425.128" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="11.0.0-rc.1.26425.128" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="11.0.0-rc.1.26425.128" />
-    <PackageVersion Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="10.0.2" />
+    <PackageVersion Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="11.0.0-preview.1.26230.3" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.InMemory" Version="11.0.0-rc.1.26425.128" />
     <PackageVersion Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="11.0.0-rc.1.26425.128" />
     <PackageVersion Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="11.0.0-rc.1.26425.128" />
