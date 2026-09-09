@@ -7,8 +7,6 @@ using Fluid;
 using Microsoft.Extensions.Configuration;
 using Microsoft.FeatureManagement;
 using Newtonsoft.Json.Schema;
-using OneOf;
-using OneOf.Types;
 
 namespace AlbusKavaliro.TempMaiSe.Mailer;
 
@@ -62,7 +60,7 @@ public class MailService : IMailService
     }
 
     /// <inheritdoc/>
-    public async Task<OneOf<SendResponse, NotFound, List<ValidationError>>> SendMailAsync(int id, Stream data, CancellationToken cancellationToken = default)
+    public async Task<SendMailResult> SendMailAsync(int id, Stream data, CancellationToken cancellationToken = default)
     {
         using Activity? activity = MailingInstrumentation.Instance?.ActivitySource.StartActivity("SendMail")!;
         activity?.AddTag("TemplateId", id);
@@ -75,10 +73,10 @@ public class MailService : IMailService
 
         TemplateData templateData = template.Data;
 
-        OneOf<MailInformation, List<ValidationError>> mailInformationOrErrors = await _dataParser.ParseAsync(templateData.JsonSchema, data, cancellationToken).ConfigureAwait(false);
-        if (mailInformationOrErrors.TryPickT1(out List<ValidationError> errors, out MailInformation? mailInformation))
+        ParseResult parseResult = await _dataParser.ParseAsync(templateData.JsonSchema, data, cancellationToken).ConfigureAwait(false);
+        if (!parseResult.Evaluate(out MailInformation? mailInformation, out List<ValidationError>? validationErrors))
         {
-            return errors;
+            return validationErrors;
         }
 
         InlineAttachmentCollection inlineAttachments = MergeInlineAttachments(templateData, mailInformation);

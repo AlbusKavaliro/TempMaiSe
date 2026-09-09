@@ -6,9 +6,8 @@ using AlbusKavaliro.TempMaiSe.Mailer;
 using AlbusKavaliro.TempMaiSe.Models;
 using AlbusKavaliro.TempMaiSe.Samples.Api;
 
-using OneOf;
-using OneOf.Types;
 using System.Text;
+using FluentEmail.Core.Models;
 
 Activity.DefaultIdFormat = ActivityIdFormat.W3C;
 
@@ -104,13 +103,15 @@ app.MapPost("/send/{id}", async (int id, Stream data, IMailService mailService, 
             );
     }
 
-    OneOf<FluentEmail.Core.Models.SendResponse, NotFound, List<ValidationError>> result = await mailService.SendMailAsync(id, data, cancellationToken).ConfigureAwait(false);
-
-    return result.Match(
-        sent => Results.Ok(sent),
-        notFound => Results.NotFound(),
-        validationErrors => Results.ValidationProblem(ConvertValidationErrorsToValidationProblem(validationErrors))
-    );
+    SendMailResult result = await mailService.SendMailAsync(id, data, cancellationToken).ConfigureAwait(false);
+    
+    return result switch
+    {
+        SendResponse sent => Results.Ok(sent),
+        NotFound notFound => Results.NotFound(),
+        List<ValidationError> validationErrors => Results.ValidationProblem(ConvertValidationErrorsToValidationProblem(validationErrors)),
+        _ => Results.StatusCode(StatusCodes.Status500InternalServerError)
+    };
 });
 
 app.Run();

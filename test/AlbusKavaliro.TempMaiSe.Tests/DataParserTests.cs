@@ -79,12 +79,12 @@ public class DataParserTests
         data.Position = 0;
 
         // Act
-        OneOf.OneOf<MailInformation, List<ValidationError>> mailInformationOrError = await _parser.ParseAsync(jsonSchema, data, TestContext.Current.CancellationToken).ConfigureAwait(true);
+        ParseResult mailInformationOrError = await _parser.ParseAsync(jsonSchema, data, TestContext.Current.CancellationToken).ConfigureAwait(true);
 
         // Assert
-        Assert.False(mailInformationOrError.IsT0);
-        Assert.NotNull(mailInformationOrError.AsT1);
-        Assert.Single(mailInformationOrError.AsT1);
+        Assert.False(mailInformationOrError.Evaluate(out MailInformation? mailInformation, out List<ValidationError>? errors));
+        Assert.NotNull(errors);
+        Assert.Single(errors);
     }
 
     [Fact]
@@ -136,13 +136,12 @@ public class DataParserTests
         data.Position = 0;
 
         // Act
-        OneOf.OneOf<MailInformation, List<ValidationError>> mailInformationOrError = await _parser.ParseAsync(jsonSchema, data, TestContext.Current.CancellationToken).ConfigureAwait(true);
+        ParseResult mailInformationOrError = await _parser.ParseAsync(jsonSchema, data, TestContext.Current.CancellationToken).ConfigureAwait(true);
 
         // Assert
-        Assert.True(mailInformationOrError.IsT0);
-        Assert.False(mailInformationOrError.IsT1);
-        MailInformation mailInformation = mailInformationOrError.AsT0;
+        Assert.True(mailInformationOrError.Evaluate(out MailInformation? mailInformation, out List<ValidationError>? errors));
         Assert.NotNull(mailInformation);
+        Assert.Null(errors);   
         Assert.Equal("dummy@example.org", mailInformation.From);
         Assert.Equal("to@example.org", mailInformation.To.Single());
         Assert.Equal("cc@example.org", mailInformation.Cc.Single());

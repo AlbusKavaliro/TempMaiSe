@@ -1,9 +1,6 @@
 ﻿using Newtonsoft.Json.Schema;
 using FluentEmail.Core.Models;
 
-using OneOf;
-using OneOf.Types;
-
 namespace AlbusKavaliro.TempMaiSe.Mailer;
 
 /// <summary>
@@ -24,5 +21,9 @@ public interface IMailService
     /// - NotFound: The template with the specified ID was not found.
     /// - List&lt;ValidationError&gt;: A list of validation errors if the email data is invalid.
     /// </returns>
-    Task<OneOf<SendResponse, NotFound, List<ValidationError>>> SendMailAsync(int id, Stream data, CancellationToken cancellationToken = default);
+    Task<SendMailResult> SendMailAsync(int id, Stream data, CancellationToken cancellationToken = default);
 }
+
+public readonly struct NotFound;
+
+public readonly union SendMailResult(SendResponse, NotFound, List<ValidationError>);

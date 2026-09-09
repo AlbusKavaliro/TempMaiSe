@@ -9,9 +9,6 @@ using Newtonsoft.Json.Schema;
 using AlbusKavaliro.TempMaiSe.Mailer;
 using AlbusKavaliro.TempMaiSe.Models;
 
-using OneOf;
-using OneOf.Types;
-
 namespace AlbusKavaliro.TempMaiSe.Tests;
 
 [Trait("Category", "Unit")]
@@ -51,7 +48,7 @@ public class MailServiceTests
         );
 
         // Act
-        OneOf<SendResponse, NotFound, List<ValidationError>> result = await mailService.SendMailAsync(templateId, data, TestContext.Current.CancellationToken).ConfigureAwait(true);
+        SendMailResult result = await mailService.SendMailAsync(templateId, data, TestContext.Current.CancellationToken).ConfigureAwait(true);
 
         // Assert
         Assert.IsType<NotFound>(result.Value);

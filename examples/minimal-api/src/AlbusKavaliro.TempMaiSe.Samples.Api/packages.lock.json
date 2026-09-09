@@ -1152,7 +1152,6 @@
           "Microsoft.FeatureManagement": "[4.7.0, )",
           "Newtonsoft.Json": "[13.0.4, )",
           "Newtonsoft.Json.Schema": "[4.0.1, )",
-          "OneOf": "[3.0.271, )",
           "jcamp.FluentEmail.Core": "[4.0.0, )"
         }
       },
@@ -1214,12 +1213,6 @@
           "NuGet.Configuration": "7.9.0",
           "NuGet.Versioning": "7.9.0"
         }
-      },
-      "OneOf": {
-        "type": "CentralTransitive",
-        "requested": "[3.0.271, )",
-        "resolved": "3.0.271",
-        "contentHash": "pqpqeK8xQGggExhr4tesVgJkjdn+9HQAO0QgrYV2hFjE3y90okzk1kQMntMiUOGfV7FrCUfKPaVvPBD4IANqKg=="
       }
     }
   }

@@ -15,10 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="OneOf" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\AlbusKavaliro.TempMaiSe.Models\AlbusKavaliro.TempMaiSe.Models.csproj" />
   </ItemGroup>
 
