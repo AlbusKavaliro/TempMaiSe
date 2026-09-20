@@ -9,7 +9,7 @@
     <PackageVersion Include="jcamp.FluentEmail.Core" Version="4.0.0" />
     <PackageVersion Include="jcamp.FluentEmail.MailKit" Version="4.0.0" />
     <PackageVersion Include="jcamp.FluentEmail.Smtp" Version="4.0.0" />
-    <PackageVersion Include="MailKit" Version="4.17.0" />
+    <PackageVersion Include="MailKit" Version="4.18.0" />
     <PackageVersion Include="MimeKit" Version="4.17.0" />
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageVersion Include="Newtonsoft.Json.Schema" Version="4.0.1" />
