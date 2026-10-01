@@ -146,11 +146,11 @@
       },
       "Newtonsoft.Json.Schema": {
         "type": "Direct",
-        "requested": "[4.0.1, )",
-        "resolved": "4.0.1",
-        "contentHash": "rbHUKp5WTIbqmLEeJ21nTTDGcfR0LA7bVMzm0bYc3yx6NFKiCIHzzvYbwA4Sqgs7+wNldc5nBlkbithWj8IZig==",
+        "requested": "[4.0.2, )",
+        "resolved": "4.0.2",
+        "contentHash": "+Kyhf67t35xoUycpSkaaxGeBaTLz/sZOPEW94HCVM/WJFVJooIsIHGUV7hS8xSvT1Ci78XwN4Fr57927OGYE6w==",
         "dependencies": {
-          "Newtonsoft.Json": "13.0.3"
+          "Newtonsoft.Json": "13.0.4"
         }
       },
       "OpenTelemetry.Exporter.Console": {
@@ -1177,7 +1177,7 @@
           "Fluid.Core": "[2.40.0, )",
           "Microsoft.FeatureManagement": "[4.7.0, )",
           "Newtonsoft.Json": "[13.0.4, )",
-          "Newtonsoft.Json.Schema": "[4.0.1, )",
+          "Newtonsoft.Json.Schema": "[4.0.2, )",
           "OneOf": "[3.0.271, )",
           "jcamp.FluentEmail.Core": "[4.0.0, )"
         }
