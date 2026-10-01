@@ -42,11 +42,11 @@
       },
       "Moq": {
         "type": "Direct",
-        "requested": "[4.20.72, )",
-        "resolved": "4.20.72",
-        "contentHash": "EA55cjyNn8eTNWrgrdZJH5QLFp2L43oxl1tlkoYUKIE9pRwL784OWiTXeCV5ApS+AMYEAlt7Fo03A2XfouvHmQ==",
+        "requested": "[4.21.0, )",
+        "resolved": "4.21.0",
+        "contentHash": "HUjrhhzEJ/AfbSBCnR8lPkpveVGpV/dNuOlnpfqBNTME93izly1CRV4N5zBySqz4m2yCRlHLPy/PnPzYokbwIg==",
         "dependencies": {
-          "Castle.Core": "5.1.1"
+          "Castle.Core": "5.2.1"
         }
       },
       "Testcontainers.Papercut": {
@@ -82,8 +82,8 @@
       },
       "Castle.Core": {
         "type": "Transitive",
-        "resolved": "5.1.1",
-        "contentHash": "rpYtIczkzGpf+EkZgDr9CClTdemhsrwA/W5hMoPjLkRFnXzH44zDLoovXeKtmxb1ykXK9aJVODSpiJml8CTw2g=="
+        "resolved": "5.2.1",
+        "contentHash": "wHARzQA695jwwKreOzNsq54KiGqKP38tv8hi8e2FXDEC/sA6BtrX90tVPDkOfVu13PbEzr00TCV8coikl+D1Iw=="
       },
       "Docker.DotNet.Enhanced": {
         "type": "Transitive",
@@ -327,9 +327,9 @@
         "dependencies": {
           "AlbusKavaliro.TempMaiSe.Models": "[3.1.4, )",
           "Fluid.Core": "[2.40.0, )",
-          "Microsoft.FeatureManagement": "[4.7.0, )",
+          "Microsoft.FeatureManagement": "[4.8.0, )",
           "Newtonsoft.Json": "[13.0.4, )",
-          "Newtonsoft.Json.Schema": "[4.0.1, )",
+          "Newtonsoft.Json.Schema": "[4.0.2, )",
           "OneOf": "[3.0.271, )",
           "jcamp.FluentEmail.Core": "[4.0.0, )"
         }
@@ -365,9 +365,9 @@
       },
       "Microsoft.FeatureManagement": {
         "type": "CentralTransitive",
-        "requested": "[4.7.0, )",
-        "resolved": "4.7.0",
-        "contentHash": "f+XutOuZZLNq6OJV8z7nys+k89W3PUsoJJgrbYTXd20GvDyJfQ9A8o2MSU8FZT7DY6jQOq3I4KO/+NHsXHdACw=="
+        "requested": "[4.8.0, )",
+        "resolved": "4.8.0",
+        "contentHash": "p1dzpXano+DTet2/hQGb+J91QonETabPYmO5BdqpsWOPq2C3WsWbm1BICTNlWqL81EVGrRrjpQh9mRNX55ZKmQ=="
       },
       "Newtonsoft.Json": {
         "type": "CentralTransitive",
@@ -377,11 +377,11 @@
       },
       "Newtonsoft.Json.Schema": {
         "type": "CentralTransitive",
-        "requested": "[4.0.1, )",
-        "resolved": "4.0.1",
-        "contentHash": "rbHUKp5WTIbqmLEeJ21nTTDGcfR0LA7bVMzm0bYc3yx6NFKiCIHzzvYbwA4Sqgs7+wNldc5nBlkbithWj8IZig==",
+        "requested": "[4.0.2, )",
+        "resolved": "4.0.2",
+        "contentHash": "+Kyhf67t35xoUycpSkaaxGeBaTLz/sZOPEW94HCVM/WJFVJooIsIHGUV7hS8xSvT1Ci78XwN4Fr57927OGYE6w==",
         "dependencies": {
-          "Newtonsoft.Json": "13.0.3"
+          "Newtonsoft.Json": "13.0.4"
         }
       },
       "OneOf": {
