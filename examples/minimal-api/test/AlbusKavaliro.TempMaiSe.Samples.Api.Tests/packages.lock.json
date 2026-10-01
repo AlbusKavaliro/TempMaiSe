@@ -4,11 +4,11 @@
     "net10.0": {
       "coverlet.MTP": {
         "type": "Direct",
-        "requested": "[10.0.1, )",
-        "resolved": "10.0.1",
-        "contentHash": "VR4/Y0Arr8cdIKhYE5dZCI2XU1ShCHZEAgm+LjokTThl1vzy9scqq8NDLETok5AchMTtsUQqcAU81N1cgHUclg==",
+        "requested": "[10.1.0, )",
+        "resolved": "10.1.0",
+        "contentHash": "FbW1D7OFFUmITgKzYhasyaX0m/oQzuU3ab4ooOURngztKK/QulCT/YuADhRDSGrE79S2dVoEQPgNkg2qBz29tg==",
         "dependencies": {
-          "Microsoft.Testing.Platform": "2.2.2"
+          "Microsoft.Testing.Platform": "2.4.1"
         }
       },
       "Microsoft.AspNetCore.Mvc.Testing": {
@@ -812,8 +812,8 @@
       },
       "Microsoft.Testing.Platform": {
         "type": "Transitive",
-        "resolved": "2.4.0",
-        "contentHash": "dp1N3P1ujb0ztwFgqz2o/ItEvq+pm19/AiA+Xq7Zpcy7oPMcxDBZLYGtf0LlU1MveEBJuKVjZhI+LnkfcH/0jQ=="
+        "resolved": "2.4.1",
+        "contentHash": "3nW9NyhN1BnHRF994DCOOUQCqVA9pDT+gPpbuhI/xUntZnGnXO4ySovKxFlFuoT/48pnI74LK/DeKVlve1L3VQ=="
       },
       "Microsoft.Testing.Platform.MSBuild": {
         "type": "Transitive",
