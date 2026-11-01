@@ -1,7 +1,7 @@
 {
     "name": "TempMaiSe",
     "devDependencies": {
-        "@droidsolutions-oss/semantic-release-nuget": "^2.0.1",
+        "@droidsolutions-oss/semantic-release-nuget": "^2.1.2",
         "@droidsolutions-oss/semantic-release-update-file": "^1.4.0",
         "@semantic-release/changelog": "^7.0.0",
         "@semantic-release/git": "^11.0.0",
